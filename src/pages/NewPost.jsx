@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import ImageUpload from "../shared/Components/FormElements/ImageUpload";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import BackButton from "../shared/Components/FormElements/Backbutton";
+import BackButton from "../shared/Components/FormElements/BackButton";
 import { ProfileContext } from "../shared/hooks/ProfileContext";
 import {API_URL} from "../config"
  

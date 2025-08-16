@@ -1,22 +1,18 @@
-// ProfileContext.jsx
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 
 export const ProfileContext = createContext();
 
 export const ProfileProvider = ({ children }) => {
-  const dummyProfile= [
-    {
-      Followers: "201",
-      Following: "150",
-      userName: "chakrik",
-      name: "Chakradhar Kotagri",
-      profileImage: "../../../myProfilePic.jpeg",
-      id: "1",
-      bio: "Hello ,I'm UI / UX designer.Open to the new Project",
-    }
-  ];
+  const [profile, setProfile] = useState(() => {
+    const stored = localStorage.getItem('profile');
+    return stored ? JSON.parse(stored) : null;
+  });
 
-  const [profile, setProfile] = useState(dummyPosts);
+  useEffect(() => {
+    if (profile) {
+      localStorage.setItem('profile', JSON.stringify(profile));
+    }
+  }, [profile]);
 
   return (
     <ProfileContext.Provider value={{ profile, setProfile }}>

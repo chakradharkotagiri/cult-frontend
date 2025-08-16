@@ -2,8 +2,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import ImageUpload from "../FormElements/ImageUpload";
 import Card from "../FormElements/Card";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -12,20 +15,48 @@ const Signup = () => {
   } = useForm();
 
   async function onSubmit(data) {
-    //stimulating an API call
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    console.log("Submitting the Form ", data);
+    const formData = new FormData();
+    formData.append("firstName", data.firstName);
+    formData.append("lastName", data.lastName);
+    formData.append("username", data.username);
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+    formData.append("avatar", data.avatar[0]); // From <input type="file" name="avatar" />
+  
+    try {
+      const res = await fetch("http://localhost:5002/api/auth/signup", {
+        method: "POST",
+        body: formData,
+      });
+  
+      const result = await res.json();
+  
+      if (res.ok) {
+        alert("✅ Signup successful! Please log in.");
+        navigate("/login");
+      } else {
+        alert(`❌ ${result.error || "Signup failed"}`);
+      }
+    } catch (err) {
+      alert("🚨 Signup failed: " + err.message);
+      console.error(err);
+    }
   }
+  
+
+  // use formik in all forms with Yup for validations , Try to use custom YUP validations
 
   return (
-    <div className="flex justify-center items-center bg-gradient-to-b from-gray-200 to-gray-400">
-      <Card className="mt-2 bg-gray-200">
-        <form className="text-2xl" onSubmit={handleSubmit(onSubmit)}>
-          <div className="mt-10">
-            <h1 className="flex justify-center mb-10 text-4xl font-bold">Signup Form</h1>
+    <div className="flex justify-center h-screen items-center bg-gradient-to-l from-[#1A1A1A] to-[#1A1A1A] ">
+      <Card className=" bg-gradient-to-l from-[#1A1A1A] to-[#1A1A1A] ">
+        <form className="text-2xl text-white" onSubmit={handleSubmit(onSubmit)}>
+          <div className="">
+            <h1 className="flex justify-center mb-10 text-4xl font-bold">
+              Signup Form
+            </h1>
             <label>First name : </label>
             <input
-              className="bg-slate-100 border-2 border-black rounded-md"
+              className="bg-slate-100 text-black border-2 border-black rounded-md"
               {...register("firstName", {
                 required: true,
                 maxLength: 20,
@@ -42,7 +73,7 @@ const Signup = () => {
           <div className="mt-10">
             <label>Last name : </label>
             <input
-              className="bg-slate-100 border-2 border-black rounded-md"
+              className="bg-slate-100 border-2 text-black border-black rounded-md"
               {...register("lastName", {
                 required: true,
                 minLength: { value: 3, message: "minimum length is 3" },
@@ -56,9 +87,23 @@ const Signup = () => {
             )}
           </div>
           <div className="mt-10">
+            <label>Username: </label>
+            <input
+              className="bg-slate-100 text-black border-2 border-black rounded-md"
+              {...register("username", {
+                required: true,
+                minLength: { value: 3, message: "Minimum length is 3" },
+              })}
+            />
+            {errors.username && (
+              <p className="text-red-700">{errors.username.message}</p>
+            )}
+          </div>
+
+          <div className="mt-10">
             <label>Email: </label>
             <input
-              className="bg-slate-100 border-2 border-black rounded-md"
+              className="bg-slate-100 text-black border-2 border-black rounded-md"
               {...register("email", {
                 pattern: {
                   value: /^[a-zA-Z0-9._%+-]+@gmail\.com$/,
@@ -69,12 +114,12 @@ const Signup = () => {
             />
             {errors.email && <p>{errors.email.message}</p>}
           </div>
-          <ImageUpload />
+          <ImageUpload register={register} />
           <div>
             <label>Password:</label>
             <input
               type="password"
-              className="bg-slate-100 border-2 border-black rounded-md"
+              className="bg-slate-100 text-black border-2 border-black rounded-md"
               {...register("password", {
                 required: true,
                 minLength: {
@@ -90,11 +135,20 @@ const Signup = () => {
             )}
           </div>
           <input
-            className="bg-slate-100 border-2 border-black mt-10 rounded-md"
+            className="bg-[#1A1A1A] border-2 text-lg  border-black mt-10 rounded-md"
             type="submit"
             disabled={isSubmitting}
             value={isSubmitting ? "Submitting" : "Submit"}
           />
+          <p className="mt-4 text-sm">
+            Already have an account?{" "}
+            <span
+              className="text-blue-500 underline cursor-pointer"
+              onClick={() => navigate("/login")}
+            >
+              Login here
+            </span>
+          </p>
         </form>
       </Card>
     </div>

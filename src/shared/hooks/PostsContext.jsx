@@ -21,6 +21,8 @@ export const PostsProvider = ({ children }) => {
       userId: "2",
       userName: "sheevang",
       name: "Shivang Verma",
+      profileImage:
+      "https://i.pinimg.com/736x/bf/99/24/bf992493edd6ef4fef60fed89a203a22.jpg",
       id: "2",
       caption: "New cozy Setup ",
       image:
@@ -30,6 +32,7 @@ export const PostsProvider = ({ children }) => {
       userId: "2",
       userName: "jajugagan",
       name: "Gagan Jaju",
+
       id: "3",
       caption: "My new JEEP WRANGLER",
       image:

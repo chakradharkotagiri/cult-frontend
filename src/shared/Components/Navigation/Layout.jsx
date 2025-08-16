@@ -1,18 +1,17 @@
-import React from 'react'
-import {Outlet} from 'react-router-dom'
-import Navlinks from './Navlinks'
+import React from "react";
+import { Outlet } from "react-router-dom";
+import Navlinks from "./Navlinks";
 
 const Layout = () => {
   return (
     <div>
-        <Navlinks/>
-        <div>
-        <Outlet/>
-       
-        </div>
-      
+      <Navlinks />
+      <div>
+      <Outlet /> 
+        {/* //Learn what this means */}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

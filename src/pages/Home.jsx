@@ -1,29 +1,37 @@
-import React, { useContext, useState } from "react";
-import Posts from "../components/Posts";
-import PostList from "../components/PostList";
-import { PostsContext, PostsProvider } from "../shared/hooks/PostsContext";
-import  {ProfileContext}  from "../shared/hooks/ProfileContext";
+import React, { useEffect, useState } from "react";
 import HomeList from "../components/HomeList";
 import Users from "./Users";
-
 import ProfHome from "../components/ProfHome";
+import { useContext } from "react";
+import { ProfileContext } from "../shared/hooks/ProfileContext";
+import axios from "axios";
 
 const Home = () => {
-  const { userPosts } = useContext(PostsContext);
-  const {profile} = useContext(ProfileContext);
+  const { profile } = useContext(ProfileContext);
+  const [posts, setPosts] = useState([]);
 
-  const [userId, setUserId] = useState(1);
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const res = await axios.get("http://localhost:5002/api/posts");
+        setPosts(res.data.posts);
+      } catch (err) {
+        console.error("Failed to fetch posts:", err);
+      }
+    };
+
+    fetchPosts();
+  }, []);
 
   return (
-    <div className="min-h-screen flex justify-normal bg-[#1A1A1A] ">
-      <div className="hidden md:w-[25%] md:block ">
-        <ProfHome profileData={profile[0]}/>
+    <div className="min-h-screen flex justify-between bg-[#1A1A1A]">
+      <div className="hidden md:w-[25%] md:block">
+        <ProfHome profileData={profile} />
       </div>
-      <HomeList posts={userPosts} className='' />
+      <HomeList posts={posts} />
       <div className="">
-      <Users className=" rounded-xl" />
+        <Users className="rounded-xl" />
       </div>
-      
     </div>
   );
 };

@@ -1,42 +1,42 @@
-import React from 'react'
+import React from 'react';
 import Card from '../shared/Components/FormElements/Card';
-import PostItem from './PostItem';
 import HomeItem from './HomeItem';
 
-const HomeList = ({posts}) => {
-    if(!posts || posts.length===0){
-        return(
-            <div className="center">
+const HomeList = ({ posts }) => {
+    console.log("POSTS:", posts);
+
+
+  if (!posts || posts.length === 0) {
+    return (
+      <div className="center">
         <Card>
-        <h2>No posts found.</h2>
+            
+          <h2>No posts found.</h2>
         </Card>
       </div>
-        );
-    }
+    );
+  }
 
-
-      
   return (
-    <div className='flex justify-center   ml-10'>
-        <ul className="">
-            {posts.map((post)=>(
-                <HomeItem 
-                key={post.id}
-                id={post.id}
-                userName={post.userName}
-                name={post.name}
-                profileImage={post.profileImage}
-                image={
-                    post.image
-                }
-                caption={post.caption}
-
-                />
-            ))}
-        </ul>
-      
+    <div className="flex justify-center ml-10">
+      <ul>
+        {posts.map((post) => (
+            <HomeItem
+            key={post._id}
+            id={post._id}
+            image={post.imageUrl}
+            caption={post.caption}
+            userName={post.userId.username}
+            name={`${post.userId.firstName} ${post.userId.lastName}`}
+            profileImage={post.userId.avatar}
+          />
+          
+          
+     
+        ))}
+      </ul>
     </div>
-  )
-}
+  );
+};
 
-export default HomeList
+export default HomeList;

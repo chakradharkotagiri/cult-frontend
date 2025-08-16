@@ -23,10 +23,10 @@ const PostList = ({posts, layout = "horizontal"}) => {
         }`}>
             {posts.map((post)=>(
                 <PostItem 
-                key={post.id}
-                id={post.id}
+                key={post._id}
+                id={post._id}
                 image={
-                    post.image
+                    post.imageUrl
                 }
                 caption={post.caption}
 

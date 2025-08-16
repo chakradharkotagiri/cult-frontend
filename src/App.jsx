@@ -18,7 +18,7 @@ import Home from "./pages/Home";
 import Settings from "./pages/Settings";
 import { PostsProvider } from "./shared/hooks/PostsContext";
 import { ProfileProvider } from "./shared/hooks/ProfileContext";
-import RequireAuth from "./shared/Components/authentication/requireAuth";
+import RequireAuth from "./shared/Components/authentication/RequireAuth";
 import EditProfileForm from "../src/components/EditProfileForm";
 import { jwtDecode } from "jwt-decode";
 

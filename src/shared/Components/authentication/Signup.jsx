@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import ImageUpload from "../FormElements/ImageUpload";
 import Card from "../FormElements/Card";
 import { useNavigate } from "react-router-dom";
+import {API_URL} from "../../../config"
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const Signup = () => {
     formData.append("avatar", data.avatar[0]); // From <input type="file" name="avatar" />
   
     try {
-      const res = await fetch("http://localhost:5002/api/auth/signup", {
+      const res = await fetch(`${API_URL}/api/auth/signup`, {
         method: "POST",
         body: formData,
       });

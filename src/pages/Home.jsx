@@ -5,6 +5,7 @@ import ProfHome from "../components/ProfHome";
 import { useContext } from "react";
 import { ProfileContext } from "../shared/hooks/ProfileContext";
 import axios from "axios";
+import {API_URL} from "../config"
 
 const Home = () => {
   const { profile } = useContext(ProfileContext);
@@ -13,7 +14,7 @@ const Home = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await axios.get("http://localhost:5002/api/posts");
+        const res = await axios.get(`${API_URL}/api/posts`);
         setPosts(res.data.posts);
       } catch (err) {
         console.error("Failed to fetch posts:", err);

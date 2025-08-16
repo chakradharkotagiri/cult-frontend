@@ -4,7 +4,8 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import BackButton from "../shared/Components/FormElements/Backbutton";
 import { ProfileContext } from "../shared/hooks/ProfileContext";
-
+import {API_URL} from "../config"
+ 
 export const NewPost = () => {
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
   const [imageFile, setImageFile] = useState(null);
@@ -25,7 +26,7 @@ export const NewPost = () => {
       formData.append("image", imageFile); // ✅ Correct image handling
       formData.append("caption", data.caption);
 
-      const res = await fetch("http://localhost:5002/api/posts", {
+      const res = await fetch(`${API_URL}/api/posts`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`, // ✅ Auth header

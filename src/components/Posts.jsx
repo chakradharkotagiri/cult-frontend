@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import PostList from "./PostList";
 import Spinner from "../shared/Components/FormElements/Spinner"
 import { ProfileContext } from "../shared/hooks/ProfileContext";
-
+import {API_URL} from "../config"
 const Posts = () => {
   const [userPosts, setUserPosts] = useState([]);
   const [loading, setLoading] = useState(true); // ✅ loading state
@@ -16,7 +16,7 @@ const Posts = () => {
       }
   
       try {
-        const res = await fetch(`http://localhost:5002/api/posts/username/${profile.username}`);
+        const res = await fetch(`${API_URL}/api/posts/username/${profile.username}`);
         const data = await res.json();
   
         if (res.ok) {

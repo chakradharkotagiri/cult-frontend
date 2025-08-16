@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ProfileContext } from "../shared/hooks/ProfileContext";
 import { toast } from "react-toastify";
-
+import {API_URL} from "../config"
 const EditProfileForm = () => {
   const { profile, setProfile } = useContext(ProfileContext);
   const navigate = useNavigate();
@@ -43,7 +43,7 @@ const EditProfileForm = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:5002/api/posts/update-profile/${profile._id}`,
+        `${API_URL}/api/posts/update-profile/${profile._id}`,
         {
           method: "PUT",
           body: formData,

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Card from "../shared/Components/FormElements/Card";
 import { ProfileContext } from "../shared/hooks/ProfileContext";
 import { FaHeart } from "react-icons/fa"; // for like icon
-
+import {API_URL} from "../config"
 const PostItem = ({ id, image, caption }) => {
   const { profile } = useContext(ProfileContext);
   const [likes, setLikes] = useState(0);
@@ -11,7 +11,7 @@ const PostItem = ({ id, image, caption }) => {
   useEffect(() => {
     const fetchLikes = async () => {
       try {
-        const res = await fetch(`http://localhost:5002/api/posts/${id}`);
+        const res = await fetch(`${API_URL}/api/posts/${id}`);
         const data = await res.json();
         const post = data.post;
     
@@ -28,7 +28,7 @@ const PostItem = ({ id, image, caption }) => {
 
   const handleLike = async () => {
     try {
-      const res = await fetch(`http://localhost:5002/api/posts/like/${id}`, {
+      const res = await fetch(`${API_URL}/api/posts/like/${id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

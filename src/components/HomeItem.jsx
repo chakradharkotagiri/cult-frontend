@@ -6,7 +6,7 @@ import CommentIcon from "../assets/svg/comment-icon";
 import ShareIcon from "../assets/svg/share-icon"
 import { useState, useEffect, useContext } from "react";
 import { ProfileContext } from "../shared/hooks/ProfileContext";
-
+import {API_URL} from "../config"
 const HomeItem = (props) => {
   const [isLiked, setIsLiked] = useState(props.isLiked || false);
   const [likeCount, setLikeCount] = useState(props.likeCount || 0);
@@ -40,7 +40,7 @@ const HomeItem = (props) => {
   useEffect(() => {
     const fetchLikes = async () => {
       try {
-        const res = await fetch(`http://localhost:5002/api/posts/${props.id}`);
+        const res = await fetch(`${API_URL}/api/posts/${props.id}`);
         const data = await res.json();
         const post = data.post;
   
@@ -57,7 +57,7 @@ const HomeItem = (props) => {
   const handleLike = async (e) => {
     e.preventDefault(); // prevent navigation from Link
     try {
-      const res = await fetch(`http://localhost:5002/api/posts/like/${props.id}`, {
+      const res = await fetch(`${API_URL}/api/posts/like/${props.id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

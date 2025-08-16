@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import HomeIcon from "../../../assets/svg/home-icon";
 import SettingsIcon from "../../../assets/svg/settings-icon";
-
+import {useDebounce} from "../../hooks/debounce-hook"
 import ProfileIcon from "../../../assets/svg/profile-icon";
+import {API_URL} from "../../../config"
 
 const Navlinks = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const location = useLocation("");
   const [searchText, setSearchText] = useState("");
   const [searchData, setSearchData] = useState([]);
+  const debouncedSearchText = useDebounce(searchText, 300);
 
   useEffect(() => {
     const loggedIn = localStorage.getItem("isLoggedIn") === "true";
@@ -26,13 +28,15 @@ const Navlinks = () => {
   };
   useEffect(() => {
     const searchReccomendations = async () => {
-      if (searchText !== "") {
+      if (debouncedSearchText.trim() !== "") {
         const res = await fetch(
-          `http://localhost:5002/api/search?query=${searchText}`
+          `${API_URL}/api/search?query=${debouncedSearchText}`
         );
         const data =await res.json();
         console.log(data)
         setSearchData(data);
+      }else{
+          setSearchData([]);
       }
     };
     searchReccomendations();
@@ -56,13 +60,13 @@ const Navlinks = () => {
                   setSearchText(e.target.value);
                 }}
               ></input>
-              <div className="text-white text-xl pl-3 bg-[#282828] ">
+              <div className="text-white text-xl  pl-3 bg-[#282828] ">
                 {searchData.map((username, index) => {
                   return (
                     <a
                       href={`/profile/${username}`}
                       key={index}
-                      className="block"
+                      className="block py-3 rounded-b-lg"
                      
                     >
                       {username}

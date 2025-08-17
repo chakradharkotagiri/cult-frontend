@@ -77,9 +77,9 @@ const Navlinks = () => {
               </div>
             </li>
             <li>
-              <button className=" bg-[#282828] rounded-lg ml-5 text-md text-gray-500 w-20">
+              {/* <button className=" bg-[#282828] rounded-lg ml-5 text-md text-gray-500 w-20">
                 Submit
-              </button>
+              </button> */}
             </li>
             <li className="mx-12 text-green-300 text-6xl">
               <NavLink

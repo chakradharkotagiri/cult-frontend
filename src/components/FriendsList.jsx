@@ -10,7 +10,7 @@ const FriendsList = (props) => {
         <div className=" ">
           <div className="flex justify-around"> {/* left part*/}
             <img className="w-14 h-14 rounded-3xl" src={props.image} />
-            <div className=" text-white">{props.userName}</div>
+            <div className=" text-white text-2xl">{props.userName}</div>
           </div>
           <div className="ml-24"> {/* right part*/}
 

@@ -26,7 +26,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen flex justify-between bg-[#1A1A1A]">
-      <div className="hidden md:w-[25%] md:block">
+      <div className="hidden md:w-1/4 md:block">
         <ProfHome profileData={profile} />
       </div>
       <HomeList posts={posts} />

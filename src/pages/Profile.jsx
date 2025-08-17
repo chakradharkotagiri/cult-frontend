@@ -16,7 +16,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="bg-[#1A1A1A] font-times min-h-screen">
+    <div className="bg-[#1A1A1A] text-center font-times min-h-screen">
       <div className="flex justify-between">
         <img
           className="w-44 h-44 rounded-full object-cover mt-10 ml-36"
@@ -26,31 +26,30 @@ const Profile = () => {
 
         <div className="mr-64 mt-10 text-[#9A9A9A]">
           <h2 className="text-3xl mb-3 font-bold">{profile.username}</h2>
-          <p className="text-xl mb-3">
-            Name: {profile.firstName} {profile.lastName}
+          <p className="text-xl justify-center mb-3">
+            {profile.firstName} {profile.lastName}
           </p>
-          <p className="text-xl mb-3">
-            Bio: {profile.bio || "No bio available"}
-          </p>
+          <p className="text-xl mb-3">{profile.bio || "No bio available"}</p>
         </div>
       </div>
 
       <div>
-        <div className="flex justify-center">
-          <h1 className="text-3xl font-bold ml-24 mb-10">
-            <Card className="bg-white">POSTS</Card>
+        <div className="flex flex-col items-center ">
+          <h1 className="text-xl  font-bold ">
+            <Card className="bg-[#282828] rounded mb-10  text-white">POSTS</Card>
           </h1>
+          <div className="flex justify-center gap-48">
+            <button onClick={handleClick}>
+              <NewPostIcon className=" mb-10 hover:bg-[#444]" />
+            </button>
 
-          <button onClick={handleClick}>
-            <NewPostIcon className="ml-60 mb-10" />
-          </button>
-
-          <button
-            onClick={() => navigate("/profile/edit")}
-            className="bg-[#333333] text-white px-4 py-2 ml-60 mb-10 mt-4 rounded hover:bg-[#444]"
-          >
-            Edit Profile
-          </button>
+            <button
+              onClick={() => navigate("/profile/edit")}
+              className="bg-[#333333] text-white px-4 py-2  mb-10 mt-4 rounded hover:bg-[#444]"
+            >
+              Edit Profile
+            </button>
+          </div>
         </div>
 
         <Posts />

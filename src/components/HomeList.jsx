@@ -3,7 +3,7 @@ import Card from '../shared/Components/FormElements/Card';
 import HomeItem from './HomeItem';
 
 const HomeList = ({ posts }) => {
-    console.log("POSTS:", posts);
+
 
 
   if (!posts || posts.length === 0) {
@@ -18,7 +18,7 @@ const HomeList = ({ posts }) => {
   }
 
   return (
-    <div className="flex justify-center ml-10">
+    <div className="flex justify-center ">
       <ul>
         {posts.map((post) => (
             <HomeItem

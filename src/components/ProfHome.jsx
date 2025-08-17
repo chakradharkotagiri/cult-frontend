@@ -6,7 +6,7 @@ import ProfileBackIcon from "../assets/svg/profileback-icon";
 const ProfHome = () => {
   const navigate = useNavigate();
   const { profile } = useContext(ProfileContext);
-  console.log("Profile context value:", profile);
+
 
   const user = profile;
 

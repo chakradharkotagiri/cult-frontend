@@ -78,7 +78,7 @@ const HomeItem = (props) => {
   };
 
   return (
-    <div className="flex justify-center   w-[px]    p-5 m-10">
+    <div className="flex justify-center   w-[575px] pl-10    p-5 m-10">
       <li className="w-full shadow-lg bg-[#282828]  rounded-3xl   text-white">
         <Card className="p-4 rounded-xl   overflow-hidden">
           <Link

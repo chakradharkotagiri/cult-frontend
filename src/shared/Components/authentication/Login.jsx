@@ -71,7 +71,7 @@ const Login = () => {
             <h1 className="text-2xl  text-white font-semibold">WELCOME BACK</h1>
             <form className="w-96" onSubmit={handleSubmit(onSubmit)}>
               <div className="mt-28 flex  flex-col">
-                <label className="ustify-content-start">UserName </label>
+                <label className="ustify-content-start font-times">Username: </label>
                 <input
                   className="bg-[#3D3D3D] outline-none font-times text-lg p-1 pl-3 border-2 border-white rounded-md mt-1"
                   {...register("username", {
@@ -83,7 +83,7 @@ const Login = () => {
               </div>
 
               <div className="mt-20 flex flex-col">
-                <label>Password:</label>
+                <label className="font-times">Password:</label>
                 <input
                   type="password"
                   className="bg-[#3D3D3D] pl-3 outline-none font-times border-2 border-white rounded-md mt-1"

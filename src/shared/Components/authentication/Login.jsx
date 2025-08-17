@@ -73,7 +73,7 @@ const Login = () => {
               <div className="mt-28 flex  flex-col">
                 <label className="ustify-content-start">UserName </label>
                 <input
-                  className="bg-[#3D3D3D] outline-none font-sans text-lg p-1 border-2 border-white rounded-md mt-1"
+                  className="bg-[#3D3D3D] outline-none font-sans text-lg p-1 pl-3 border-2 border-white rounded-md mt-1"
                   {...register("username", {
                     required: true,
                     message: "userId is mandatory",
@@ -86,7 +86,7 @@ const Login = () => {
                 <label>Password:</label>
                 <input
                   type="password"
-                  className="bg-[#3D3D3D] outline-none border-2 border-white rounded-md mt-1"
+                  className="bg-[#3D3D3D] pl-3 outline-none border-2 border-white rounded-md mt-1"
                   {...register("password", {
                     required: true,
                     minLength: {

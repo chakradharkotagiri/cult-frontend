@@ -40,7 +40,7 @@ const Navlinks = () => {
       }
     };
     searchReccomendations();
-  }, [searchText]);
+  }, [debouncedSearchText]);
 
   const getNavLinkClass = (isActive) =>
     isActive ? "text-amber-400 underline" : "text-white hover:text-green-300";

@@ -6,7 +6,7 @@ const UserFriends = (props) => {
 
 
   return (
-    <div className=" bg-[#282828] h-max  justify-around w-[450px] rounded-3xl  m-4 ">
+    <div className=" bg-[#282828] h-max  justify-around w-[400px] rounded-3xl  m-4 ">
       <div className="text-2xl text-white font-times justify-around p-5">
         Add New
         <ul className=" ">

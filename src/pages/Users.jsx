@@ -30,8 +30,8 @@ const Users = ({ className, ...rest }) => {
   }, []);
 
   return (
-    <div className={`${className}`} {...rest}>
-      <UserFriends className="  " suggested={allUsers} />
+    <div className={`p-4 ${className}`} {...rest}>
+      <UserFriends className="" suggested={allUsers} />
     </div>
   );
 };

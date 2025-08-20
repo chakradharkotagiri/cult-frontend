@@ -47,26 +47,26 @@ const Navlinks = () => {
 
   return (
     <div className="flex bg-[#1A1A1A] justify-center pt-8">
-      <ul className="font-times flex text-2xl">
+      <ul className="font-times  flex text-2xl">
         {isLoggedIn && (
           <>
-            <li>
+            <li className="relative">
               {/* //search functionality // */}
               <input
-                className="bg-[#282828] caret-white text-white pl-4 outline-none rounded-t-lg "
+                className="bg-[#282828] mb-5  caret-white text-white pl-4 outline-none rounded-t-lg "
                 value={searchText}
                 placeholder="Seach User"
                 onChange={(e) => {
                   setSearchText(e.target.value);
                 }}
               ></input>
-              <div className="text-white text-xl  pl-3 bg-[#282828] ">
+              <div className="absolute top-full -mt-px left-0 right-0 z-50 text-white text-xl bg-[#282828] rounded-b-lg shadow-lg max-h-60 overflow-y-auto">
                 {searchData.map((username, index) => {
                   return (
                     <a
                       href={`/profile/${username}`}
                       key={index}
-                      className="block py-3 rounded-b-lg"
+                      className="block py-3 px-3 hover:bg-[#3A3A3A] transition-colors border-b border-gray-600 last:border-b-0"
                      
                     >
                       {username}

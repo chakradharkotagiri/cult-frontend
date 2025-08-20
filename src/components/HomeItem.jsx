@@ -3,21 +3,51 @@ import Card from "../shared/Components/FormElements/Card";
 import { Link } from "react-router-dom";
 import LikeIcon from "../assets/svg/like-icon";
 import CommentIcon from "../assets/svg/comment-icon";
-import ShareIcon from "../assets/svg/share-icon"
+import ShareIcon from "../assets/svg/share-icon";
 import { useState, useEffect, useContext } from "react";
 import { ProfileContext } from "../shared/hooks/ProfileContext";
-import {API_URL} from "../config"
+import { API_URL } from "../config";
+
 const HomeItem = (props) => {
   const [isLiked, setIsLiked] = useState(props.isLiked || false);
   const [likeCount, setLikeCount] = useState(props.likeCount || 0);
+  const [imageOrientation, setImageOrientation] = useState('landscape'); // default to landscape
 
   const { profile } = useContext(ProfileContext);
   const [likes, setLikes] = useState(0);
   const [liked, setLiked] = useState(false);
   const [isCommented, setIsCommented] = useState(props.isCommented || false);
   const [commentCount, setCommentCount] = useState(props.commentCount || 1);
-
   const [shareCount, setShareCount] = useState(props.commentCount || 0);
+
+  // Function to detect image orientation
+  const handleImageLoad = (e) => {
+    const { naturalWidth, naturalHeight } = e.target;
+    
+    if (naturalWidth > naturalHeight) {
+      setImageOrientation('landscape');
+    } else if (naturalHeight > naturalWidth) {
+      setImageOrientation('portrait');
+    } else {
+      setImageOrientation('square');
+    }
+  };
+
+  // Get CSS classes based on orientation
+  const getImageClasses = () => {
+    const baseClasses = "rounded-3xl cursor-pointer transition-transform hover:scale-105";
+    
+    switch(imageOrientation) {
+      case 'portrait':
+        return `${baseClasses} w-full max-w-sm mx-auto h-auto max-h object-cover`;
+      case 'landscape':
+        return `${baseClasses} w-full h-64 md:h-80 object-cover`;
+      case 'square':
+        return `${baseClasses} w-full max-w-md mx-auto h-auto aspect-square object-cover`;
+      default:
+        return `${baseClasses} w-full h-64 object-cover`;
+    }
+  };
 
   const handleClick = () => {
     const img = document.createElement("img");
@@ -37,25 +67,26 @@ const HomeItem = (props) => {
 
     document.body.appendChild(img);
   };
+
   useEffect(() => {
     const fetchLikes = async () => {
       try {
         const res = await fetch(`${API_URL}/api/posts/${props.id}`);
         const data = await res.json();
         const post = data.post;
-  
+
         setLikes(post.likes.length);
         setLiked(post.likes.includes(profile.id));
       } catch (err) {
         console.error("Failed to fetch likes", err);
       }
     };
-  
+
     fetchLikes();
   }, [props.id, profile.id]);
-  
+
   const handleLike = async (e) => {
-    e.preventDefault(); // prevent navigation from Link
+    e.preventDefault();
     try {
       const res = await fetch(`${API_URL}/api/posts/like/${props.id}`, {
         method: "PUT",
@@ -63,7 +94,7 @@ const HomeItem = (props) => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-  
+
       const data = await res.json();
       setLikes(data.likes);
       setLiked(data.liked);
@@ -71,16 +102,17 @@ const HomeItem = (props) => {
       console.error("Like failed", err);
     }
   };
+
   const toggleLike = (e) => {
-    e.preventDefault(); // Prevent Link navigation on icon click
+    e.preventDefault();
     setIsLiked((prev) => !prev);
     setLikeCount((prev) => (isLiked ? prev - 1 : prev + 1));
   };
 
   return (
-    <div className="flex justify-center   w-[575px] ml-24    p-5 m-10">
-      <li className="w-full shadow-lg bg-[#282828]  rounded-3xl   text-white">
-        <Card className="p-4 rounded-xl   overflow-hidden">
+    <div className="flex justify-center">
+      <li className="w-[80%] shadow-lg bg-[#282828] mb-5 rounded-3xl text-white">
+        <Card className="p-4 rounded-xl overflow-hidden">
           <Link
             to={`/${props.id}/posts`}
             className="block pt-12 pb-24 px-10 hover:opacity-90"
@@ -98,23 +130,33 @@ const HomeItem = (props) => {
             </div>
 
             <div className="mt-5 mb-6 ml-8 text-left font-serif text-sm">
-            {props.userName} : {props.caption}
+              {props.userName} : {props.caption}
             </div>
-            <img
-              className="w-[487px]  h-[302px] object-contain rounded-3x"
-              src={props.image}
-              onClick={handleClick}
-              alt="Post"
-            />
+
+            {/* Dynamic image styling based on orientation */}
+            <div className="flex justify-center mb-4">
+              <img
+                className={getImageClasses()}
+                src={props.image}
+                onClick={handleClick}
+                onLoad={handleImageLoad}
+                alt="Post"
+              />
+            </div>
+
             <div className="flex">
-            <div className="mt-4">
-  <button onClick={handleLike}>
-    <LikeIcon
-      className={`w-6 h-6 mx-auto ${liked ? "text-red-500 fill-red-500" : "text-white fill-none"}`}
-    />
-  </button>
-  <p className="text-sm mt-1 text-gray-300">{likes}</p>
-</div>
+              <div className="mt-4">
+                <button onClick={handleLike}>
+                  <LikeIcon
+                    className={`w-6 h-6 mx-auto ${
+                      liked
+                        ? "text-red-500 fill-red-500"
+                        : "text-white fill-none"
+                    }`}
+                  />
+                </button>
+                <p className="text-sm mt-1 text-gray-300">{likes}</p>
+              </div>
 
               <div className="mt-4 ml-3">
                 <button onClick={toggleLike}>
@@ -126,17 +168,14 @@ const HomeItem = (props) => {
                     }`}
                   />
                 </button>
-                <p className="text-sm mt-1 text-gray-300">
-                  {commentCount} 
-                </p>
+                <p className="text-sm mt-1 text-gray-300">{commentCount}</p>
               </div>
+
               <div className="mt-4 ml-3">
                 <button>
-                  <ShareIcon/>
+                  <ShareIcon />
                 </button>
-                <p className="text-sm mt-1 text-gray-300">
-                  {shareCount} 
-                </p>
+                <p className="text-sm mt-1 text-gray-300">{shareCount}</p>
               </div>
             </div>
           </Link>

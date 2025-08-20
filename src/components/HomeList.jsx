@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Card from '../shared/Components/FormElements/Card';
 import HomeItem from './HomeItem';
 
-const HomeList = ({ posts }) => {
+const HomeList = ({ posts,className }) => {
 
 
 
@@ -18,10 +19,11 @@ const HomeList = ({ posts }) => {
   }
 
   return (
-    <div className="flex justify-center ">
+    <div className={`flex justify-center ${className}`.trim() }>
       <ul>
         {posts.map((post) => (
             <HomeItem
+
             key={post._id}
             id={post._id}
             image={post.imageUrl}
@@ -37,6 +39,12 @@ const HomeList = ({ posts }) => {
       </ul>
     </div>
   );
+
+};
+
+HomeList.propTypes = {
+  posts: PropTypes.array,
+  className: PropTypes.string,
 };
 
 export default HomeList;

@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ProfileContext } from "../shared/hooks/ProfileContext";
+import PropTypes from 'prop-types';
 import ProfileBackIcon from "../assets/svg/profileback-icon";
 
-const ProfHome = () => {
+const ProfHome = ({className}) => {
   const navigate = useNavigate();
   const { profile } = useContext(ProfileContext);
-
+  console.log("Profile context value:", profile);
 
   const user = profile;
 
@@ -17,8 +18,7 @@ const ProfHome = () => {
   if (!user) return null;
 
   return (
-    <div className="mr-10 bg-[#1A1A1A] text-white p-4 rounded-lg lg:w-[500px] shadow-lg">
-      <ProfileBackIcon />
+    <div className={` bg-[#1A1A1A] text-white  rounded-lg lg:w-[500px] shadow-lg ${className || ''}`}>      <ProfileBackIcon />
       <img
         src={user.avatar || "/default-profile.png"}
         className="w-40 h-40 border-[10px] border-[#1A1A1A] object-contain rounded-lg -translate-y-96 translate-x-[170px] z-10 relative bg-[#1A1A1A] p-1"
@@ -52,6 +52,9 @@ const ProfHome = () => {
       </div>
     </div>
   );
+};
+ProfHome.propTypes = {
+  className: PropTypes.string,
 };
 
 export default ProfHome;

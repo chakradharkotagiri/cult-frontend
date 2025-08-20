@@ -3,16 +3,13 @@ import Card from "../shared/Components/FormElements/Card";
 import FriendsList from "../components/FriendsList";
 
 const UserFriends = (props) => {
-
-
   return (
-    <div className=" bg-[#282828] h-max  justify-around w-[400px] rounded-3xl  m-4 ">
+    <div className="bg-[#282828] h-max w-full max-w-[400px] justify-around rounded-3xl">
       <div className="text-2xl text-white font-times justify-around p-5">
         Add New
-        <ul className=" ">
+        <ul className="">
           {Array.isArray(props.suggested) &&
             props.suggested.map((friend) => (
-
               <FriendsList
                 id={friend._id}
                 key={friend._id}
@@ -22,7 +19,6 @@ const UserFriends = (props) => {
             ))}
         </ul>
       </div>
-      {/* <div className="text-2xl text-white font-times justify-around p-5">Recent Activity</div> */}
     </div>
   );
 };

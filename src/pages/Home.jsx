@@ -27,7 +27,7 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-[#1A1A1A] relative overflow-hidden">
 
-    <div className="hidden md:block absolute left-0 top-0 w-1/4 h-full z-10">
+    <div className="hidden md:block absolute left-0 top-0  h-full z-10">
       <ProfHome className="" profileData={profile} />
     </div>
     

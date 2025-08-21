@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import "./index.css";
-
+import {Provider} from 'react-redux'
 import Signup from "./shared/Components/authentication/Signup";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from "react-router-dom";
-
+import {store} from './store'
 import UserFriends from "./pages/UserFriends";
 import Login from "./shared/Components/authentication/Login";
 import Profile from "./pages/Profile";
@@ -56,6 +56,7 @@ const App = () => {
   }, [location]);
 
   return (
+    <Provider store={store}>
     <ProfileProvider>
       <PostsProvider>
         <Routes>
@@ -92,6 +93,7 @@ const App = () => {
         </Routes>
       </PostsProvider>
     </ProfileProvider>
+    </Provider>
   );
 };
 

@@ -19,13 +19,14 @@ const HomeList = ({ posts,className }) => {
   }
 
   return (
-    <div className={`flex justify-center ${className}`.trim() }>
+    <div className={` ${className}`.trim() }>
       <ul>
         {posts.map((post) => (
             <HomeItem
 
             key={post._id}
             id={post._id}
+            className={className}
             image={post.imageUrl}
             caption={post.caption}
             userName={post.userId.username}

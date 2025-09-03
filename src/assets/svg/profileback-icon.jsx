@@ -7,7 +7,8 @@ const ProfileBackIcon = ({className,...rest}) => (
     width="500"
     height="500"
     fill="none"
-    className={className}
+    
+    className={className }
     viewBox="0 0 473 418"
     {...rest}
   >

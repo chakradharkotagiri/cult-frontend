@@ -53,7 +53,7 @@ const Login = () => {
         console.log("Profile set in context ✅", user);
 
   
-        navigate("/"); // or "/home" depending on your routing
+        navigate("/");
       } else {
         alert(result.error || "Invalid credentials");
       }

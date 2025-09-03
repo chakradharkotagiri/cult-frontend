@@ -5,6 +5,7 @@ import SettingsIcon from "../../../assets/svg/settings-icon";
 import {useDebounce} from "../../hooks/debounce-hook"
 import ProfileIcon from "../../../assets/svg/profile-icon";
 import {API_URL} from "../../../config"
+import useOnlineStatus from "../../hooks/onlineStatus";
 
 const Navlinks = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -18,6 +19,8 @@ const Navlinks = () => {
     setIsLoggedIn(loggedIn);
   }, [location]);
   const navigate = useNavigate();
+
+  const onlineStatus = useOnlineStatus();
 
   const handleLogout = () => {
     // Clear login flag from localStorage
@@ -50,16 +53,22 @@ const Navlinks = () => {
       <ul className="font-times  flex text-2xl">
         {isLoggedIn && (
           <>
+          {/* <li>
+            OnlineStatus : {onlineStatus? '✅' : '🔴' + "  "} 
+          </li> */}
             <li className="relative">
               {/* //search functionality // */}
-              <input
-                className="bg-[#282828] mb-5  caret-white text-white pl-4 outline-none rounded-t-lg "
+              <div className=""> 
+                <input
+                className="bg-[#282828]  mb-5  caret-white text-white pl-4 outline-none rounded-t-lg "
                 value={searchText}
                 placeholder="Seach User"
                 onChange={(e) => {
                   setSearchText(e.target.value);
                 }}
               ></input>
+              </div>
+              
               <div className="absolute top-full -mt-px left-0 right-0 z-50 text-white text-xl bg-[#282828] rounded-b-lg shadow-lg max-h-60 overflow-y-auto">
                 {searchData.map((username, index) => {
                   return (

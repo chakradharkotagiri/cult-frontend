@@ -5,7 +5,7 @@ import ProfHome from "../components/ProfHome";
 import { useContext } from "react";
 import { ProfileContext } from "../shared/hooks/ProfileContext";
 import axios from "axios";
-import {API_URL} from "../config"
+import { API_URL } from "../config";
 
 const Home = () => {
   const { profile } = useContext(ProfileContext);
@@ -26,23 +26,18 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-[#1A1A1A] relative overflow-hidden">
+      <div className="hidden md:block absolute  ml-0 left-0 top-0  h-full z-10">
+        <ProfHome className="" profileData={profile} />
+      </div>
 
-    <div className="hidden md:block absolute left-0 top-0  h-full z-10">
-      <ProfHome className="" profileData={profile} />
-    </div>
-    
+      <div className="h-screen overflow-y-scroll relative scrollbar-hide mx-0 z-30 md:mx-[25%]">
+        <HomeList className="" posts={posts} />
+      </div>
 
-    <div className="h-screen overflow-y-scroll scrollbar-hide mx-0  md:mx-[25%]">
-      <HomeList className="" posts={posts} />
+      <div className="hidden md:block absolute right-0 top-0 mr-4 w-1/4 h-full z-10">
+        <Users className="" />
+      </div>
     </div>
-    
-
-    <div className="hidden md:block absolute right-0 top-0 w-1/4 h-full z-10">
-      <Users className="" />
-    </div>
-  </div>
-  
-  
   );
 };
 

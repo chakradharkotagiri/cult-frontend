@@ -30,7 +30,7 @@ const Users = ({ className, ...rest }) => {
   }, []);
 
   return (
-    <div className={`p-4 ${className}`} {...rest}>
+    <div className={`p- ${className}`} {...rest}>
       <UserFriends className="" suggested={allUsers} />
     </div>
   );

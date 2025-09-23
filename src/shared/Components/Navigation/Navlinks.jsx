@@ -48,6 +48,9 @@ const Navlinks = () => {
   const getNavLinkClass = (isActive) =>
     isActive ? "text-amber-400 underline" : "text-white hover:text-green-300";
 
+  if (!isLoggedIn || location.pathname === "/login" || location.pathname === "/signup") return null;
+
+
   return (
     <div className="flex bg-[#1A1A1A] justify-center pt-8">
       <ul className="font-avenir  flex text-2xl">
@@ -115,7 +118,7 @@ const Navlinks = () => {
             </li>
           </>
         )}
-        {!isLoggedIn && (
+        {/* {!isLoggedIn && (
           <>
             <li className="mx-16">
               <NavLink
@@ -134,7 +137,7 @@ const Navlinks = () => {
               </NavLink>
             </li>
           </>
-        )}
+        )} */}
       </ul>
     </div>
   );

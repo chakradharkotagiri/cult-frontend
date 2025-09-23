@@ -1,23 +1,18 @@
-import React from "react";
-import { useEffect,useContext} from "react";
+import React, { useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import Card from "../FormElements/Card";
-import {ProfileContext} from "../../hooks/ProfileContext";
-import {API_URL} from "../../../config"
-
+import { ProfileContext } from "../../hooks/ProfileContext";
+import { API_URL } from "../../../config";
 
 const Login = () => {
   const navigate = useNavigate();
   const { setProfile } = useContext(ProfileContext);
-
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm();
-
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -33,26 +28,22 @@ const Login = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           username: data.username,
-          password: data.password
-        })
+          password: data.password,
+        }),
       });
-  
+
       const result = await res.json();
-  
+
       if (res.ok) {
         localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("token", result.token); // store JWT
-  
+        localStorage.setItem("token", result.token);
+
         const user = result.user;
-  
-        // ✅ Update profile context
         setProfile(user);
         localStorage.setItem("profile", JSON.stringify(user));
-        
-        
+
         console.log("Profile set in context ✅", user);
 
-  
         navigate("/");
       } else {
         alert(result.error || "Invalid credentials");
@@ -62,54 +53,50 @@ const Login = () => {
       alert("Login failed. Check backend.");
     }
   }
-  
-  return (
-    <div className="flex min-h-screen bg-gradient-to-l from-[#1A1A1A] to-[#1A1A1A] ">
-      <div className="flex sm:w-screen w-screen sm:h-screen  md:h-screen h-screen justify-center  items-center ">
-        <Card className="text-center bg-gradient-to-l   h-[700px] from-[#1B1B1B] to-[#3D3D3D]">
-          <div className="text-3xl text-white">
-            <h1 className="text-2xl  text-white font-semibold">WELCOME BACK</h1>
-            <form className="w-96" onSubmit={handleSubmit(onSubmit)}>
-              <div className="mt-28 flex  flex-col">
-                <label className="ustify-content-start font-times">Username: </label>
-                <input
-                  className="bg-[#3D3D3D] outline-none font-times text-lg p-1 pl-3 border-2 border-white rounded-md mt-1"
-                  {...register("username", {
-                    required: true,
-                    message: "userId is mandatory",
-                  })}
-                />
-                {errors.email && <p>{errors.email.message}</p>}
-              </div>
 
-              <div className="mt-20 flex flex-col">
-                <label className="font-times">Password:</label>
-                <input
-                  type="password"
-                  className="bg-[#3D3D3D] pl-3 outline-none font-times border-2 border-white rounded-md mt-1"
-                  {...register("password", {
-                    required: true,
-                    minLength: {
-                      value: 5,
-                      message: "Password is mandatory (Minimum length 5",
-                    },
-                  })}
-                />
-                {errors.password && (
-                  <p className="text-red-700 bg ml-28 ">
-                    {errors.password.message}
-                  </p>
-                )}
-              </div>
+  return (
+    <div className="flex min-h-screen bg-gradient-to-tr from-[#3e3d3d] from-10% via-[#2a2a2a] to-[#0d0d0d] to-60%">
+      
+      {/* Left side: Login form */}
+      <div className="flex-1 flex flex-col justify-center  items-center px-6">
+        <div className="w-full max-w-md text-white">
+          <h1 className="text-3xl font-semibold mb-20 font-avenir text-center">WELCOME BACK</h1>
+          <form className="flex flex-col space-y-6" onSubmit={handleSubmit(onSubmit)}>
+            <div className="flex flex-col">
+              <label className="font-avenir mb-1 text-lg">Username:</label>
               <input
-                type="submit"
-                disabled={isSubmitting}
-                className="border-black border-2 bg-[#1B1B1B] h-8  rounded-lg text-sm w-full justify-center text-white mt-20"
-                value={isSubmitting ? "Submitting" : "Submit"}
+                className="bg-[#3D3D3D] outline-none font-times mb-20 text-lg p-2 border-2 border-white rounded-md"
+                {...register("username", { required: "Username is required" })}
               />
-            </form>
-          </div>
-          <p className="mt-4 text-white text-sm">
+              {errors.username && (
+                <p className="text-red-700 mt-1">{errors.username.message}</p>
+              )}
+            </div>
+
+            <div className="flex flex-col">
+              <label className="font-avenir text-lg mb-1">Password:</label>
+              <input
+                type="password"
+                className="bg-[#3D3D3D] p-2 outline-none mb-20 font-times border-2 border-white rounded-md"
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: { value: 5, message: "Minimum length 5" },
+                })}
+              />
+              {errors.password && (
+                <p className="text-red-700 mt-1">{errors.password.message}</p>
+              )}
+            </div>
+
+            <input
+              type="submit"
+              disabled={isSubmitting}
+              className="border-black border-2 bg-[#1B1B1B] h-10 rounded-lg text-white font-avenir font-medium"
+              value={isSubmitting ? "Submitting" : "Login"}
+            />
+          </form>
+
+          <p className="mt-6 text-sm font-avenir text-center">
             Don't have an account?{" "}
             <span
               className="text-blue-400 underline cursor-pointer"
@@ -118,13 +105,16 @@ const Login = () => {
               Create a new account
             </span>
           </p>
-        </Card>
+        </div>
       </div>
-      <div className="hidden md:block">
+
+      {/* Right side: Image */}
+      <div className="hidden md:flex md:flex-1 h-screen">
         <img
-          className=" w-[1400px] h-[850px] object-cover"
+          className="w-full h-full object-cover"
           src="../../../../image.png"
-        ></img>
+          alt="Login visual"
+        />
       </div>
     </div>
   );

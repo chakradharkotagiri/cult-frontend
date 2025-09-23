@@ -48,7 +48,7 @@ const Signup = () => {
   // use formik in all forms with Yup for validations , Try to use custom YUP validations
 
   return (
-    <div className="flex justify-center h-screen items-center bg-gradient-to-l from-[#1A1A1A] to-[#1A1A1A] ">
+    <div className="flex justify-center min-h-screen  items-center bg-gradient-to-l from-[#1A1A1A] to-[#1A1A1A] ">
       <Card className=" bg-gradient-to-l from-[#1A1A1A] to-[#1A1A1A] ">
         <form className="text-2xl text-white" onSubmit={handleSubmit(onSubmit)}>
           <div className="">

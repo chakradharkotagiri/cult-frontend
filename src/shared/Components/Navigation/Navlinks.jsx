@@ -50,7 +50,8 @@ const Navlinks = () => {
 
   return (
     <div className="flex bg-[#1A1A1A] justify-center pt-8">
-      <ul className="font-times  flex text-2xl">
+      <ul className="font-avenir  flex text-2xl">
+        
         {isLoggedIn && (
           <>
           {/* <li>
@@ -60,7 +61,7 @@ const Navlinks = () => {
               {/* //search functionality // */}
               <div className=""> 
                 <input
-                className="bg-[#282828]  mb-5  caret-white text-white pl-4 outline-none rounded-t-lg "
+                className="bg-[#282828]  mb-5 flex items-center  text-xl caret-white text-white pl-4 outline-none rounded-t-lg "
                 value={searchText}
                 placeholder="Seach User"
                 onChange={(e) => {
@@ -70,15 +71,15 @@ const Navlinks = () => {
               </div>
               
               <div className="absolute top-full -mt-px left-0 right-0 z-50 text-white text-xl bg-[#282828] rounded-b-lg shadow-lg max-h-60 overflow-y-auto">
-                {searchData.map((username, index) => {
+                {searchData.map((user, index) => {
                   return (
                     <a
-                      href={`/profile/${username}`}
+                      href={`/profile/${user.username}`}
                       key={index}
                       className="block py-3 px-3 hover:bg-[#3A3A3A] transition-colors border-b border-gray-600 last:border-b-0"
                      
                     >
-                      {username}
+                    <span>{user.username}</span>
                     </a>
                   );
                 })}
@@ -86,11 +87,9 @@ const Navlinks = () => {
               </div>
             </li>
             <li>
-              {/* <button className=" bg-[#282828] rounded-lg ml-5 text-md text-gray-500 w-20">
-                Submit
-              </button> */}
+             
             </li>
-            <li className="mx-12 text-green-300 text-6xl">
+            <li className="mx-8 text-green-300 text-6xl">
               <NavLink
                 to="/"
                 className={({ isActive }) => getNavLinkClass(isActive)}
@@ -98,15 +97,15 @@ const Navlinks = () => {
                 <HomeIcon />
               </NavLink>
             </li>
-            <li className="mx-12">
+            <li className="mx-8">
               <NavLink
                 to="/profile"
                 className={({ isActive }) => getNavLinkClass(isActive)}
               >
-                <ProfileIcon className="w-[20px] h-[20px]" />
+                <ProfileIcon className="w-[15px] h-[20px]" />
               </NavLink>
             </li>
-            <li className="mx-16">
+            <li className="mx-8">
               <NavLink
                 to="/settings"
                 className={({ isActive }) => getNavLinkClass(isActive)}

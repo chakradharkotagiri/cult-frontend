@@ -26,7 +26,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-[#1A1A1A] relative overflow-hidden">
-      <div className="hidden md:block absolute  ml-0 left-0 top-0  h-full z-10">
+      <div className="hidden md:block absolute  ml-0 left-0 top-0   h-full z-10">
         <ProfHome className="" profileData={profile} />
       </div>
 
@@ -34,7 +34,7 @@ const Home = () => {
         <HomeList className="" posts={posts} />
       </div>
 
-      <div className="hidden md:block absolute right-0 top-0 mr-4 w-1/4 h-full z-10">
+      <div className="hidden md:block absolute right-0 top-0 mr-4 md:w-[27%] 2xl:w-1/4 h-full z-10">
         <Users className="" />
       </div>
     </div>

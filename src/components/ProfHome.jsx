@@ -18,7 +18,7 @@ const ProfHome = ({ className }) => {
 
   return (
     <div
-      className={` bg-[#1A1A1A] text-white font-avenir  rounded-lg md:w-[400px]  shadow-lg ${
+      className={` bg-[#1A1A1A] text-white font-avenir  rounded-lg md:w-[425px] 2xl:w-[500px]  shadow-lg ${
         className || ""
       }`}
     >
@@ -28,18 +28,18 @@ const ProfHome = ({ className }) => {
       <div className="">
         <img
           src={user.avatar || "/default-profile.png"}
-          className="w-40 h-40 border-[10px] border-[#1A1A1A] object-contain rounded-lg  -translate-y-[200%] translate-x-[75%] z-10 relative bg-[#1A1A1A] p-1"
+          className="w-40 h-40 border-[10px] border-[#1A1A1A] object-contain rounded-lg  -translate-y-[200%] translate-x-[82%] 2xl:translate-x-[100%] z-10 relative bg-[#1A1A1A] p-1"
           alt="Profile"
         />
         {/* user Info box  */}
-        <div className="bg-[#282828] ml-5 h-96 w-[90%]  rounded-3xl overflow-hidden z-0  -translate-y-[100%]">
+        <div className="bg-[#282828] ml-5 h-96 w-[90%]  rounded-xl overflow-hidden z-0  -translate-y-[100%]">
           <div className="flex">
             <div className="ml-12 mt-3">{user.followers}</div>
-            <div className="ml-60 mt-3">0</div>
+            <div className="md:ml-64 2xl:ml-[73%] mt-3">0</div>
           </div>
           <div className="flex">
             <div className="text-gray-500 pl-5">Followers</div>
-            <div className="text-gray-500 ml-[50%]">Following</div>
+            <div className="text-gray-500 md:ml-[50%] 2xl:ml-[60%]">Following</div>
           </div>
           <div className="text-center pt-14 font-semibold text-xl">
             {user.firstName} {user.lastName}

@@ -111,7 +111,7 @@ const HomeItem = (props) => {
 
   return (
     <div className="flex justify-center">
-      <li className="w-[80%] shadow-lg bg-[#282828] mb-5 rounded-3xl text-white">
+      <li className="w-[80%] shadow-lg bg-[#282828] mb-5 rounded-xl text-white">
         <Card className="p-4 rounded-xl overflow-hidden">
           <Link
             to={`/${props.id}/posts`}

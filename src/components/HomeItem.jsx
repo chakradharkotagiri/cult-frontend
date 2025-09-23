@@ -35,17 +35,17 @@ const HomeItem = (props) => {
 
   // Get CSS classes based on orientation
   const getImageClasses = () => {
-    const baseClasses = "rounded-3xl cursor-pointer transition-transform hover:scale-105";
+    const baseClasses = "rounded-3xl cursor-pointer transition-transform hover:scale-105 object-cover";
     
     switch(imageOrientation) {
       case 'portrait':
-        return `${baseClasses} w-full max-w-sm mx-auto h-auto max-h object-cover`;
+        return `${baseClasses}w-full h-96 md:h-[28rem] `;
       case 'landscape':
-        return `${baseClasses} w-full h-64 md:h-80 object-cover`;
+        return `${baseClasses} w-full h-64 md:h-80 `;
       case 'square':
-        return `${baseClasses} w-full max-w-md mx-auto h-auto aspect-square object-cover`;
+        return `${baseClasses} w-full max-w-md mx-auto h-auto aspect-square `;
       default:
-        return `${baseClasses} w-full h-64 object-cover`;
+        return `${baseClasses} w-full h-64 `;
     }
   };
 
@@ -115,7 +115,7 @@ const HomeItem = (props) => {
         <Card className="p-4 rounded-xl overflow-hidden">
           <Link
             to={`/${props.id}/posts`}
-            className="block pt-12 pb-24 px-10 hover:opacity-90"
+            className="block pt-2 pb-2 px-10 hover:opacity-90"
           >
             <div className="flex">
               <img
@@ -125,11 +125,11 @@ const HomeItem = (props) => {
               />
               <div>
                 <h2 className="text-sm font-bold mb-2">{props.userName}</h2>
-                <p className="text-2xl text-gray-400">{props.name}</p>
+                <p className="text-xl text-gray-400">{props.name}</p>
               </div>
             </div>
 
-            <div className="mt-5 mb-6 ml-8 text-left font-serif text-sm">
+            <div className="mt-3 mb-6 ml-8 text-left font-serif text-sm">
               {props.userName} : {props.caption}
             </div>
 

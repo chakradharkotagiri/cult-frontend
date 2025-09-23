@@ -8,6 +8,7 @@ export default {
       fontFamily: {
         barriecito: ["Barriecito", "serif"], // Register the Barriecito font
         times: ['Times New Roman', 'serif'],
+        avenir: ['Avenir', 'Helvetica', 'Arial', 'sans-serif'],
       },
     },
   },

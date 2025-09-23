@@ -2,6 +2,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+  font-family: 'Avenir';
+  src: url('/fonts/avenir/Avenir-Regular.woff2') format('woff2'),
+       url('/fonts/avenir/Avenir-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src: url('/fonts/avenir/Avenir-Bold.woff2') format('woff2'),
+       url('/fonts/avenir/Avenir-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
 
 .scrollbar-hide::-webkit-scrollbar {
     display: none;

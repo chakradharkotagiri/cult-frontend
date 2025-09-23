@@ -5,7 +5,7 @@ import FriendsList from "../components/FriendsList";
 const UserFriends = (props) => {
   return (
     <div className="bg-[#282828] h-max w-full max-w[400px]  justify-around rounded-3xl">
-      <div className="text-2xl text-white font-times justify-around p-5">
+      <div className="text-lg text-white font-avenir  justify-around p-5">
         Add New
         <ul className="">
           {Array.isArray(props.suggested) &&

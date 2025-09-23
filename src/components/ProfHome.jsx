@@ -18,7 +18,7 @@ const ProfHome = ({ className }) => {
 
   return (
     <div
-      className={` bg-[#1A1A1A] text-white   rounded-lg md:w-[400px]  shadow-lg ${
+      className={` bg-[#1A1A1A] text-white font-avenir  rounded-lg md:w-[400px]  shadow-lg ${
         className || ""
       }`}
     >
@@ -41,10 +41,10 @@ const ProfHome = ({ className }) => {
             <div className="text-gray-500 pl-5">Followers</div>
             <div className="text-gray-500 ml-[50%]">Following</div>
           </div>
-          <div className="text-center pt-14 text-2xl">
+          <div className="text-center pt-14 font-semibold text-xl">
             {user.firstName} {user.lastName}
           </div>
-          <div className="text-center pt-3 text-[#939393] font-light">
+          <div className="text-center pt-3 text-[#626161] font-light">
             @{user.username}
           </div>
           <div className="pt-5 text-center">{user.bio || "No bio yet"}</div>

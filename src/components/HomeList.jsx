@@ -3,15 +3,12 @@ import PropTypes from 'prop-types';
 import Card from '../shared/Components/FormElements/Card';
 import HomeItem from './HomeItem';
 
-const HomeList = ({ posts,className }) => {
-
-
+const HomeList = ({ posts, className }) => {
 
   if (!posts || posts.length === 0) {
     return (
       <div className="center">
         <Card>
-            
           <h2>No posts found.</h2>
         </Card>
       </div>
@@ -19,28 +16,26 @@ const HomeList = ({ posts,className }) => {
   }
 
   return (
-    <div className={` ${className}`.trim() }>
+    <div className={`${className}`.trim()}>
       <ul>
-        {posts.map((post) => (
+        {posts.map((post) => {
+          if (!post.userId) return null; 
+          return (
             <HomeItem
-
-            key={post._id}
-            id={post._id}
-            className={className}
-            image={post.imageUrl}
-            caption={post.caption}
-            userName={post.userId.username}
-            name={`${post.userId.firstName} ${post.userId.lastName}`}
-            profileImage={post.userId.avatar}
-          />
-          
-          
-     
-        ))}
+              key={post._id}
+              id={post._id}
+              className={className}
+              image={post.imageUrl}
+              caption={post.caption}
+              userName={post.userId.username}
+              name={`${post.userId.firstName} ${post.userId.lastName}`}
+              profileImage={post.userId.avatar}
+            />
+          );
+        })}
       </ul>
     </div>
   );
-
 };
 
 HomeList.propTypes = {

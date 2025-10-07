@@ -40,7 +40,7 @@ const StoryBar = () => {
           alt={user.username || "user"}
           className="w-full h-full rounded-lg object-cover"
         />
-      </div
+      </div>
     ))}
   </div>
   

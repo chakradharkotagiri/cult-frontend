@@ -32,7 +32,7 @@ const ProfHome = ({ className }) => {
           alt="Profile"
         />
         {/* user Info box  */}
-        <div className="bg-[#282828] ml-5 h-96 w-[90%]  rounded-xl overflow-hidden z-0  -translate-y-[100%]">
+        <div className="bg-[#282828] ml-5 h-80 w-[90%]  rounded-xl overflow-hidden z-0  -translate-y-[125%]">
           <div className="flex">
             <div className="ml-12 mt-3">{user.followers}</div>
             <div className="md:ml-64 2xl:ml-[73%] mt-3">0</div>
@@ -41,14 +41,14 @@ const ProfHome = ({ className }) => {
             <div className="text-gray-500 pl-5">Followers</div>
             <div className="text-gray-500 md:ml-[50%] 2xl:ml-[60%]">Following</div>
           </div>
-          <div className="text-center pt-14 font-semibold text-xl">
+          <div className="text-center pt-8 font-semibold text-xl">
             {user.firstName} {user.lastName}
           </div>
           <div className="text-center pt-3 text-[#626161] font-light">
             @{user.username}
           </div>
           <div className="pt-5 text-center">{user.bio || "No bio yet"}</div>
-          <div className="flex justify-center pt-8">
+          <div className="flex justify-center pt-4">
             <button
               onClick={toProfile}
               className="w-[246px] h-[42px] text-sm rounded-2xl bg-gradient-to-b from-[#282828] to-[#4e4d4d]"

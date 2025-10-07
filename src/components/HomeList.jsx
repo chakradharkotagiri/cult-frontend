@@ -2,8 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Card from '../shared/Components/FormElements/Card';
 import HomeItem from './HomeItem';
+import CaptionBox from './CaptionBox';
+import { useContext } from 'react';
+import { ProfileContext } from '../shared/hooks/ProfileContext';
+import StoryBar from './StoryBar';
 
 const HomeList = ({ posts, className }) => {
+  const {profile} = useContext(ProfileContext);
 
   if (!posts || posts.length === 0) {
     return (
@@ -17,6 +22,11 @@ const HomeList = ({ posts, className }) => {
 
   return (
     <div className={`${className}`.trim()}>
+      <StoryBar/>
+            <CaptionBox className=""
+            profileImage={profile.avatar}
+            />
+
       <ul>
         {posts.map((post) => {
           if (!post.userId) return null; 

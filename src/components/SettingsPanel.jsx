@@ -28,14 +28,14 @@ const SettingsPanel = ({ selected }) => {
     case "Account":
       content = (
         <div>
-          <div className="flex h-[100px] rounded-lg bg-[#212121] items-center ">
-                <div className=" pl-16 ">
+          <div className="flex h-[100px] rounded-lg bg-[#212121] items-center hover:rounded-lg  ">
+                <div className=" pl-16  ">
                     <ProfileIcon />{" "}
                 </div>
-                <div className="pl-10  text-3xl"> Account </div>
+                <div className="pl-10   text-3xl"> Account </div>
           </div>
 
-          <button className="w-full p-8 text-2xl text-left hover:bg-gray-700">
+          <button className="w-full p-8 text-2xl text-left hover:bg-gray-700 hover:rounded-lg pt-10">
                 Edit Profile Information
                 <div className="text-sm pt-7">
                      Change your name, profile picture, or bio.
@@ -44,7 +44,7 @@ const SettingsPanel = ({ selected }) => {
          <div className="p-2 pt-0 pl-9 text-2xl">
                 ________________________________________________________________
           </div>
-          <button className="w-full p-8 text-2xl text-left hover:bg-gray-700">
+          <button className="w-full p-8 text-2xl text-left hover:bg-gray-700 hover:rounded-lg pt-10">
             Email Address
             <div className="text-sm pt-7">
                 Update your registered email
@@ -54,7 +54,7 @@ const SettingsPanel = ({ selected }) => {
           <div className="p-2 pt-0 pl-9 text-2xl">
             ________________________________________________________________
           </div>
-          <button className=" w-full p-8 text-2xl text-left hover:bg-gray-700">
+          <button className=" w-full p-8 text-2xl text-left hover:bg-gray-700 hover:rounded-lg pt-10">
             Phone Number
             <div className="text-sm pt-7">
                 Add or modify your contact number
@@ -64,7 +64,7 @@ const SettingsPanel = ({ selected }) => {
           <div className="p-2 pt-0 pl-9 text-2xl">
             ________________________________________________________________
           </div>
-          <button className="w-full p-8 text-2xl text-left hover:bg-gray-700">
+          <button className="w-full p-8 text-2xl text-left hover:bg-gray-700 hover:rounded-lg pt-10">
             UserName Settings
             <div className="text-sm pt-7">
               Change your display or login username

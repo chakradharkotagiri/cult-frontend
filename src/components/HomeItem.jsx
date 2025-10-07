@@ -7,11 +7,12 @@ import ShareIcon from "../assets/svg/share-icon";
 import { useState, useEffect, useContext } from "react";
 import { ProfileContext } from "../shared/hooks/ProfileContext";
 import { API_URL } from "../config";
+import CaptionBox from "./CaptionBox";
 
 const HomeItem = (props) => {
   const [isLiked, setIsLiked] = useState(props.isLiked || false);
   const [likeCount, setLikeCount] = useState(props.likeCount || 0);
-  const [imageOrientation, setImageOrientation] = useState('landscape'); // default to landscape
+  const [imageOrientation, setImageOrientation] = useState("landscape"); // default to landscape
 
   const { profile } = useContext(ProfileContext);
   const [likes, setLikes] = useState(0);
@@ -23,29 +24,30 @@ const HomeItem = (props) => {
   // Function to detect image orientation
   const handleImageLoad = (e) => {
     const { naturalWidth, naturalHeight } = e.target;
-    
+
     if (naturalWidth > naturalHeight) {
-      setImageOrientation('landscape');
+      setImageOrientation("landscape");
     } else if (naturalHeight > naturalWidth) {
-      setImageOrientation('portrait');
+      setImageOrientation("portrait");
     } else {
-      setImageOrientation('square');
+      setImageOrientation("square");
     }
   };
 
   // Get CSS classes based on orientation
   const getImageClasses = () => {
-    const baseClasses = "rounded-3xl cursor-pointer transition-transform hover:scale-105 object-cover";
-    
-    switch(imageOrientation) {
-      case 'portrait':
-        return `${baseClasses}w-full h-96 md:h-[28rem] `;
-      case 'landscape':
-        return `${baseClasses} w-full h-64 md:h-80 `;
-      case 'square':
-        return `${baseClasses} w-full max-w-md mx-auto h-auto aspect-square `;
+    const baseClasses =
+      "rounded-3xl cursor-pointer transition-transform hover:scale-105 ";
+
+    switch (imageOrientation) {
+      case "portrait":
+        return `${baseClasses}w-full h-96 md:h-[28rem] object-contain`;
+      case "landscape":
+        return `${baseClasses} w-full h-64 md:h-80 object-cover `;
+      case "square":
+        return `${baseClasses} w-full max-w-md mx-auto h-auto aspect-square object-cover `;
       default:
-        return `${baseClasses} w-full h-64 `;
+        return `${baseClasses} w-full h-64  `;
     }
   };
 
@@ -119,7 +121,7 @@ const HomeItem = (props) => {
           >
             <div className="flex">
               <img
-                className="w-12 h-12 mx-5 rounded-full object-cover"
+                className="w-12 h-12 mx-5 rounded-md object-cover"
                 src={props.profileImage}
                 alt="Profile pic"
               />

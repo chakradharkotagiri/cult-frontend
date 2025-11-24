@@ -13,9 +13,9 @@ export default function Signup() {
     handleSubmit,
     watch,
     trigger,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, touchedFields, dirtyFields },
   } = useForm({
-    mode: "onChange",          // validate while typing
+    mode: "onChange", // validate while typing
     reValidateMode: "onChange",
   });
 
@@ -23,13 +23,17 @@ export default function Signup() {
   const emailValue = watch("email");
 
   useEffect(() => {
-    // debounce validation after user stops typing for 700ms
+    // only run debounce validation when user has interacted with the field
+    if (!emailValue) return; // nothing typed yet
+    // also ensure the field is touched/dirty (user started typing)
+    if (!touchedFields.email && !dirtyFields.email) return;
+
     const id = setTimeout(() => {
       // trigger validation for email field only
       trigger("email");
     }, 700);
     return () => clearTimeout(id);
-  }, [emailValue, trigger]);
+  }, [emailValue, trigger, touchedFields, dirtyFields]);
 
   async function onSubmit(data) {
     const formData = new FormData();
@@ -38,10 +42,7 @@ export default function Signup() {
     formData.append("username", data.username);
     formData.append("email", data.email);
     formData.append("password", data.password);
-    // avatar might be undefined; if present append first file
-    if (data.avatar && data.avatar.length > 0) {
-      formData.append("avatar", data.avatar[0]);
-    }
+    formData.append("avatar", data.avatar && data.avatar[0]);
 
     try {
       const res = await fetch(`${API_URL}/api/auth/signup`, {
@@ -62,6 +63,9 @@ export default function Signup() {
       console.error(err);
     }
   }
+
+  // Layout changes below: stack inputs vertically with consistent width and spacing
+  // Keep existing Tailwind look & feel but add utility classes to align everything.
 
   return (
     <div className="flex justify-center min-h-screen items-center bg-gradient-to-l from-[#1A1A1A] to-[#1A1A1A] p-4">
@@ -133,7 +137,10 @@ export default function Signup() {
                   },
                 })}
               />
-              {errors.email && <p className="text-red-700 text-sm mt-1">{errors.email.message}</p>}
+              {/* show email error only after user interacted with the field */}
+              {errors.email && (touchedFields.email || dirtyFields.email) && (
+                <p className="text-red-700 text-sm mt-1">{errors.email.message}</p>
+              )}
             </div>
 
             {/* simplified file chooser: no preview, just the choose file input */}
@@ -173,8 +180,11 @@ export default function Signup() {
             />
 
             <p className="mt-2 text-sm text-center">
-              Already have an account?{" "}
-              <span className="text-blue-500 underline cursor-pointer" onClick={() => navigate("/login")}>
+              Already have an account?{' '}
+              <span
+                className="text-blue-500 underline cursor-pointer"
+                onClick={() => navigate('/login')}
+              >
                 Login here
               </span>
             </p>

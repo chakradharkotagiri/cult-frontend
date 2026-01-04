@@ -39,7 +39,7 @@ const EditProfileForm = () => {
     formData.append("firstName", firstName);
     formData.append("lastName", lastName);
     formData.append("bio", bio);
-    if (image) formData.append("profileImage", image); // backend saves it as 'avatar'
+    if (image) formData.append("profileImage", image); 
 
     try {
       const res = await fetch(

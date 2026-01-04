@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-// removed ImageUpload import since we use a simple file input now
 import Card from "../FormElements/Card";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../../config";
@@ -15,21 +14,17 @@ export default function Signup() {
     trigger,
     formState: { errors, isSubmitting, touchedFields, dirtyFields },
   } = useForm({
-    mode: "onChange", // validate while typing
+    mode: "onChange", 
     reValidateMode: "onChange",
   });
-
-  // watch email to trigger debounced validation when user stops typing
   const emailValue = watch("email");
 
   useEffect(() => {
-    // only run debounce validation when user has interacted with the field
-    if (!emailValue) return; // nothing typed yet
-    // also ensure the field is touched/dirty (user started typing)
+ 
+    if (!emailValue) return; 
     if (!touchedFields.email && !dirtyFields.email) return;
 
     const id = setTimeout(() => {
-      // trigger validation for email field only
       trigger("email");
     }, 700);
     return () => clearTimeout(id);
@@ -64,8 +59,7 @@ export default function Signup() {
     }
   }
 
-  // Layout changes below: stack inputs vertically with consistent width and spacing
-  // Keep existing Tailwind look & feel but add utility classes to align everything.
+
 
   return (
     <div className="flex justify-center min-h-screen items-center bg-gradient-to-l from-[#1A1A1A] to-[#1A1A1A] p-4">
@@ -137,13 +131,11 @@ export default function Signup() {
                   },
                 })}
               />
-              {/* show email error only after user interacted with the field */}
               {errors.email && (touchedFields.email || dirtyFields.email) && (
                 <p className="text-red-700 text-sm mt-1">{errors.email.message}</p>
               )}
             </div>
 
-            {/* simplified file chooser: no preview, just the choose file input */}
             <div>
               <label className="block mb-1">Profile image</label>
               <input
@@ -152,7 +144,6 @@ export default function Signup() {
                 className="w-full text-sm placeholder:text-sm bg-slate-100 text-black border-2 border-black rounded-md px-2 py-1"
                 {...register("avatar")}
               />
-              {/* optional helper text if you want */}
               <p className="text-xs text-gray-300 mt-1">Choose a profile image (optional)</p>
             </div>
 

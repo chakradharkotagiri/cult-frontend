@@ -56,7 +56,7 @@ export const NewPost = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#1A1A1A] text-[#FFFFFF] font-avenir flex flex-col items-center py-10">
+    <div className="min-h-screen bg-[#1A1A1A] text-[#FFFFFF] font-Inter flex flex-col items-center py-10">
       {/* Header */}
       <div className="flex items-center justify-between w-11/12 md:w-3/4 mb-10">
         <BackButton className="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-all duration-200" />

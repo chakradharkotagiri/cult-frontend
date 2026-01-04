@@ -37,7 +37,7 @@ const ImageUpload = ({ className, register = () => ({}), onImageSelect }) => {
   };
 
   return (
-    <div className={`${className} font-avenir `}>
+    <div className={`${className} font-Inter `}>
       <table className="mt-10 text-xl h-[300px] ml-[30px] border-collapse">
         <tbody>
           <tr className="align-middle">

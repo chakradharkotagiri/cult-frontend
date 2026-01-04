@@ -9,7 +9,7 @@ const CaptionBox = ({ className, profileImage }) => {
         <img className="h-9 w-9 object-cover rounded-lg" src={profileImage} />
       </div>
       <div className="w-full">
-        <input placeholder="Tell your friends about your thoughts.." className="bg-[#1A1A1A] text-sm  caret-white outline-none font-avenir p-3 text-white/20 rounded-md h-9 w-full  "/>
+        <input placeholder="Tell your friends about your thoughts.." className="bg-[#1A1A1A] text-sm  caret-white outline-none font-Inter p-3 text-white/20 rounded-md h-9 w-full  "/>
       </div>
     </div>
   );

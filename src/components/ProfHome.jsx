@@ -18,7 +18,7 @@ const ProfHome = ({ className }) => {
 
   return (
     <div
-      className={` bg-[#1A1A1A] text-white font-avenir  rounded-lg md:w-[425px] 2xl:w-[500px]  shadow-lg ${
+      className={` bg-[#1A1A1A] text-white font-Inter  rounded-lg md:w-[425px] 2xl:w-[500px]  shadow-lg ${
         className || ""
       }`}
     >

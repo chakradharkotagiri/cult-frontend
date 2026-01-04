@@ -57,13 +57,13 @@ const Login = () => {
   return (
     <div className="flex min-h-screen bg-gradient-to-tr from-[#3e3d3d] from-10% via-[#2a2a2a] to-[#0d0d0d] to-60%">
       
-      {/* Left side: Login form */}
+
       <div className="flex-1 flex flex-col justify-center  items-center px-6">
         <div className="w-full max-w-md text-white">
-          <h1 className="text-3xl font-semibold mb-20 font-avenir text-center">WELCOME BACK</h1>
+          <h1 className="text-3xl font-semibold mb-20 font-Inter text-center">WELCOME BACK</h1>
           <form className="flex flex-col space-y-6" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col">
-              <label className="font-avenir mb-1 text-lg">Username:</label>
+              <label className="font-Inter mb-1 text-lg">Username:</label>
               <input
                 className="bg-[#3D3D3D] outline-none font-times mb-20 text-lg p-2 border-2 border-white rounded-md"
                 {...register("username", { required: "Username is required" })}
@@ -74,7 +74,7 @@ const Login = () => {
             </div>
 
             <div className="flex flex-col">
-              <label className="font-avenir text-lg mb-1">Password:</label>
+              <label className="font-Inter text-lg mb-1">Password:</label>
               <input
                 type="password"
                 className="bg-[#3D3D3D] p-2 outline-none mb-20 font-times border-2 border-white rounded-md"
@@ -91,12 +91,12 @@ const Login = () => {
             <input
               type="submit"
               disabled={isSubmitting}
-              className="border-black border-2 bg-[#1B1B1B] h-10 rounded-lg text-white font-avenir font-medium"
+              className="border-black border-2 bg-[#1B1B1B] h-10 rounded-lg text-white font-Inter font-medium"
               value={isSubmitting ? "Submitting" : "Login"}
             />
           </form>
 
-          <p className="mt-6 text-sm font-avenir text-center">
+          <p className="mt-6 text-sm font-Inter text-center">
             Don't have an account?{" "}
             <span
               className="text-blue-400 underline cursor-pointer"
@@ -108,7 +108,7 @@ const Login = () => {
         </div>
       </div>
 
-      {/* Right side: Image */}
+
       <div className="hidden md:flex md:flex-1 h-screen">
         <img
           className="w-full h-full object-cover"

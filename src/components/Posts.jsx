@@ -1,13 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import PostList from "./PostList";
 import Spinner from "../shared/Components/FormElements/Spinner";
-import { ProfileContext } from "../shared/hooks/ProfileContext";
 import { useGetUserPostsQuery } from "../services/api"; // Import RTK Query hook
 
-const Posts = () => {
-  // Get the logged-in user's profile from context
-  const { profile } = useContext(ProfileContext);
-
+const Posts = ({ userId }) => {
   /**
    * RTK QUERY HOOK - REPLACES ALL YOUR useEffect + useState LOGIC
    * 
@@ -29,11 +26,10 @@ const Posts = () => {
     refetch             // Function to manually refetch if needed
   } = useGetUserPostsQuery(
     // Pass the user ID as parameter (your backend expects userId, not username)
-    profile?.id || profile?._id, 
+    userId,
     {
-      // Only make API call if we have a profile with ID
-      // This replaces your "if (!profile?.username)" check
-      skip: !profile?.id && !profile?._id
+      // Only make API call if we have a user ID
+      skip: !userId
     }
   );
 
@@ -73,6 +69,10 @@ const Posts = () => {
    * userPosts will be undefined initially, so use empty array as fallback
    */
   return <PostList posts={userPosts || []} />;
+};
+
+Posts.propTypes = {
+  userId: PropTypes.string,
 };
 
 export default Posts;

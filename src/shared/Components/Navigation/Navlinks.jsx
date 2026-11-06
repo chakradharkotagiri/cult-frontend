@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import HomeIcon from "../../../assets/svg/home-icon";
 import SettingsIcon from "../../../assets/svg/settings-icon";
 import { useDebounce } from "../../hooks/debounce-hook";
 import ProfileIcon from "../../../assets/svg/profile-icon";
-import { API_URL } from "../../../config";
+import { API_URL, DEFAULT_AVATAR } from "../../../config";
 import { useContext } from "react";
 import { ProfileContext } from "../../hooks/ProfileContext";
 
@@ -31,20 +31,37 @@ const Navlinks = () => {
     navigate("/login");
   };
   useEffect(() => {
+    // Set on cleanup so a slow response can't overwrite a newer search.
+    let isStale = false;
+
     const searchReccomendations = async () => {
-      if (debouncedSearchText.trim() !== "") {
+      if (debouncedSearchText.trim() === "") {
+        setSearchData([]);
+        return;
+      }
+
+      try {
         const res = await fetch(
-          `${API_URL}/api/search?query=${debouncedSearchText}`
+          `${API_URL}/api/search?query=${encodeURIComponent(debouncedSearchText)}`
         );
         const data = await res.json();
-        console.log(data);
-        setSearchData(data);
-      } else {
-        setSearchData([]);
+        if (!isStale) setSearchData(res.ok ? data : []);
+      } catch (err) {
+        console.error("Search failed", err);
+        if (!isStale) setSearchData([]);
       }
     };
+
     searchReccomendations();
+    return () => {
+      isStale = true;
+    };
   }, [debouncedSearchText]);
+
+  const clearSearch = () => {
+    setSearchText("");
+    setSearchData([]);
+  };
 
   const getNavLinkClass = (isActive) =>
     isActive ? "text-amber-400 underline" : "text-white hover:text-green-300";
@@ -73,15 +90,21 @@ const Navlinks = () => {
           </div>
 
           <div className="absolute top-full -mt-px left-0 right-0 z-50 text-white text-xl bg-[#282828] rounded-b-lg shadow-lg max-h-60 overflow-y-auto">
-            {searchData.map((user, index) => {
+            {searchData.map((user) => {
               return (
-                <a
-                  href={`/profile/${user.username}`}
-                  key={index}
-                  className="block py-3 px-3 hover:bg-[#3A3A3A] transition-colors border-b border-gray-600 last:border-b-0"
+                <Link
+                  to={`/profile/${user._id}`}
+                  key={user._id}
+                  onClick={clearSearch}
+                  className="flex items-center gap-3 py-3 px-3 hover:bg-[#3A3A3A] transition-colors border-b border-gray-600 last:border-b-0"
                 >
+                  <img
+                    src={user.avatar || DEFAULT_AVATAR}
+                    alt=""
+                    className="w-8 h-8 rounded-full object-cover"
+                  />
                   <span>{user.username}</span>
-                </a>
+                </Link>
               );
             })}
           </div>

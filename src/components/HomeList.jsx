@@ -34,6 +34,7 @@ const HomeList = ({ posts, className }) => {
             <HomeItem
               key={post._id}
               id={post._id}
+              authorId={post.userId._id}
               className={className}
               image={post.imageUrl}
               caption={post.caption}

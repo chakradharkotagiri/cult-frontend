@@ -35,6 +35,11 @@ export const api = createApi({
 
             providesTags:['User'],
         }),
+        getUserById: builder.query({
+            query:(userId)=>`/users/${userId}`,
+
+            providesTags:['User'],
+        }),
         getUserPosts: builder.query({
             query:(userId)=>`/posts/user/${userId}`,
 
@@ -48,5 +53,6 @@ export const api = createApi({
 export const {
     useGetPostsQuery,
     useGetUsersQuery,
+    useGetUserByIdQuery,
     useGetUserPostsQuery,
 } = api;

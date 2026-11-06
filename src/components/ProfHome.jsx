@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ProfileContext } from "../shared/hooks/ProfileContext";
 import PropTypes from "prop-types";
 import ProfileBackIcon from "../assets/svg/profileback-icon";
+import { DEFAULT_AVATAR } from "../config";
 
 const ProfHome = ({ className }) => {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const ProfHome = ({ className }) => {
       </div>
       <div className="">
         <img
-          src={user.avatar || "/default-profile.png"}
+          src={user.avatar || DEFAULT_AVATAR}
           className="w-40 h-40 border-[10px] border-[#1A1A1A] object-contain rounded-lg  -translate-y-[200%] translate-x-[82%] 2xl:translate-x-[100%] z-10 relative bg-[#1A1A1A] p-1"
           alt="Profile"
         />

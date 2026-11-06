@@ -8,7 +8,7 @@ const PostList = ({posts, layout = "horizontal"}) => {
         return(
             <div className="center">
         <Card>
-        <h2>No users found.</h2>
+        <h2 className="text-[#9A9A9A]">No posts yet.</h2>
         </Card>
       </div>
         );

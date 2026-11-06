@@ -86,6 +86,14 @@ const App = () => {
                 </RequireAuth>
               }
             />
+            <Route
+              path="profile/:userId"
+              element={
+                <RequireAuth>
+                  <Profile />
+                </RequireAuth>
+              }
+            />
             <Route path="login" element={<Login />} />
             <Route path="Signup" element={<Signup />} />
             <Route path="/profile/NewPost" element={<NewPost />} />

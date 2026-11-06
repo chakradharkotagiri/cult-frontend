@@ -46,9 +46,20 @@ const EditProfileForm = () => {
         `${API_URL}/api/posts/update-profile/${profile._id}`,
         {
           method: "PUT",
+          // No Content-Type: the browser adds the multipart boundary itself.
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
           body: formData,
         }
       );
+
+      if (res.status === 401) {
+        localStorage.clear();
+        toast.error("Your session has expired. Please log in again.");
+        navigate("/login");
+        return;
+      }
 
       const data = await res.json();
       console.log("Updated user response:", data);

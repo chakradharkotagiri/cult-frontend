@@ -1,5 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import UserFriends from "../pages/UserFriends";
+import { DEFAULT_AVATAR } from "../config";
 import Card from "../shared/Components/FormElements/Card";
 
 const FriendsList = (props) => {
@@ -8,10 +10,10 @@ const FriendsList = (props) => {
     <div className="font-avenir  text-black md:w-[105%]  2xl:w-[100%] ">
       <Card className="my-6  text-black bg-[#1A1A1A]  bg-opacity-70 h-28 p-4 shadow-lg rounded-xl mx-5  ">
         <div className="w-full ">
-          <div className="flex "> 
-            <img className="w-12 h-12  mx-2  mb-3 object-cover rounded-2xl" src={props.image} />
+          <Link to={`/profile/${props.id}`} className="flex hover:opacity-80">
+            <img className="w-12 h-12  mx-2  mb-3 object-cover rounded-2xl" src={props.image || DEFAULT_AVATAR} alt="" />
             <div className=" text-white mt-1 text-lg h-6 font-semibold">{props.userName}</div>
-          </div>
+          </Link>
           <div className="mt-1 w-full">
 
 

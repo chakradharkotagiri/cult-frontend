@@ -6,7 +6,7 @@ import CommentIcon from "../assets/svg/comment-icon";
 import ShareIcon from "../assets/svg/share-icon";
 import { useState, useEffect, useContext } from "react";
 import { ProfileContext } from "../shared/hooks/ProfileContext";
-import { API_URL } from "../config";
+import { API_URL, DEFAULT_AVATAR } from "../config";
 import CaptionBox from "./CaptionBox";
 import ImageLightbox from "./ImageLightbox";
 
@@ -105,13 +105,13 @@ const HomeItem = (props) => {
       <li className="w-[80%] shadow-lg bg-[#282828] mb-5 rounded-xl text-white">
         <Card className="p-4 rounded-xl overflow-hidden">
           <Link
-            to={`/${props.id}/posts`}
+            to={`/profile/${props.authorId}`}
             className="block pt-2 pb-2 px-10 hover:opacity-90"
           >
             <div className="flex">
               <img
                 className="w-12 h-12 mx-5 rounded-md object-cover"
-                src={props.profileImage}
+                src={props.profileImage || DEFAULT_AVATAR}
                 alt="Profile pic"
               />
               <div>
@@ -163,7 +163,7 @@ const HomeItem = (props) => {
               </div>
 
               <div className="mt-4 ml-3">
-                <button>
+                <button onClick={(e) => e.preventDefault()}>
                   <ShareIcon />
                 </button>
                 <p className="text-sm mt-1 text-gray-300">{shareCount}</p>

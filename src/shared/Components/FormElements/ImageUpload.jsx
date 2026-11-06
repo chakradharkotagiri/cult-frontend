@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { Form } from "react-bootstrap";
 import defaultImage from "../../../assets/defaultImage.jpeg";
 import blankImage from "../../../assets/blankImage.png";
@@ -65,7 +65,6 @@ const ImageUpload = ({ className, register = () => ({}), onImageSelect }) => {
           </tr>
         </tbody>
       </table>
-      <ToastContainer />
     </div>
   );
 };

@@ -20,6 +20,7 @@ const stickyColumnClasses =
  */
 const Home = () => {
   const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -28,6 +29,8 @@ const Home = () => {
         setPosts(res.data.posts);
       } catch (err) {
         console.error("Failed to fetch posts:", err);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -42,7 +45,7 @@ const Home = () => {
         </aside>
 
         <main className="min-w-0">
-          <HomeList posts={posts} />
+          <HomeList posts={posts} isLoading={isLoading} />
         </main>
 
         <aside className={`hidden lg:block ${stickyColumnClasses}`}>

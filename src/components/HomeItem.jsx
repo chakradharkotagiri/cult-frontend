@@ -14,6 +14,7 @@ const HomeItem = (props) => {
   const [isLiked, setIsLiked] = useState(props.isLiked || false);
   const [likeCount, setLikeCount] = useState(props.likeCount || 0);
   const [imageOrientation, setImageOrientation] = useState("landscape"); // default to landscape
+  const [isImageSettled, setIsImageSettled] = useState(false);
 
   const { profile } = useContext(ProfileContext);
   const [likes, setLikes] = useState(0);
@@ -25,6 +26,7 @@ const HomeItem = (props) => {
 
   // Function to detect image orientation
   const handleImageLoad = (e) => {
+    setIsImageSettled(true);
     const { naturalWidth, naturalHeight } = e.target;
 
     if (naturalWidth > naturalHeight) {
@@ -124,12 +126,20 @@ const HomeItem = (props) => {
           </div>
 
           {/* Dynamic image styling based on orientation */}
-          <div className="flex justify-center mb-4">
+          <div
+            data-testid="post-image"
+            className={`flex justify-center mb-4 ${
+              isImageSettled ? "" : "skeleton rounded-3xl"
+            }`}
+          >
             <img
-              className={getImageClasses()}
+              className={`${getImageClasses()} ${
+                isImageSettled ? "" : "opacity-0"
+              }`}
               src={props.image}
               onClick={handleImageClick}
               onLoad={handleImageLoad}
+              onError={() => setIsImageSettled(true)}
               alt="Post"
             />
           </div>

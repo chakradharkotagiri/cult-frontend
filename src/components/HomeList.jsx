@@ -6,27 +6,35 @@ import CaptionBox from './CaptionBox';
 import { useContext } from 'react';
 import { ProfileContext } from '../shared/hooks/ProfileContext';
 import StoryBar from './StoryBar';
+import PostSkeleton from './PostSkeleton';
 
-const HomeList = ({ posts, className }) => {
+const SKELETON_POST_COUNT = 3;
+
+const HomeList = ({ posts, isLoading, className }) => {
   const {profile} = useContext(ProfileContext);
 
-  if (!posts || posts.length === 0) {
+  const renderPosts = () => {
+    if (isLoading) {
+      return (
+        <div role="status" aria-label="Loading posts">
+          {Array.from({ length: SKELETON_POST_COUNT }, (_, index) => (
+            <PostSkeleton key={index} />
+          ))}
+        </div>
+      );
+    }
+
+    if (!posts || posts.length === 0) {
+      return (
+        <div className="center">
+          <Card>
+            <h2 className="text-[#9A9A9A]">No posts found.</h2>
+          </Card>
+        </div>
+      );
+    }
+
     return (
-      <div className="center">
-        <Card>
-          <h2>No posts found.</h2>
-        </Card>
-      </div>
-    );
-  }
-
-  return (
-    <div className={`${className}`.trim()}>
-      <StoryBar/>
-            <CaptionBox className=""
-            profileImage={profile.avatar}
-            />
-
       <ul>
         {posts.map((post) => {
           if (!post.userId) return null; 
@@ -45,12 +53,21 @@ const HomeList = ({ posts, className }) => {
           );
         })}
       </ul>
+    );
+  };
+
+  return (
+    <div className={`${className || ""}`.trim()}>
+      <StoryBar/>
+      <CaptionBox className="" profileImage={profile.avatar} />
+      {renderPosts()}
     </div>
   );
 };
 
 HomeList.propTypes = {
   posts: PropTypes.array,
+  isLoading: PropTypes.bool,
   className: PropTypes.string,
 };
 

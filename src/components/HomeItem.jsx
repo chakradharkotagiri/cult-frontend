@@ -8,6 +8,7 @@ import { useState, useEffect, useContext } from "react";
 import { ProfileContext } from "../shared/hooks/ProfileContext";
 import { API_URL } from "../config";
 import CaptionBox from "./CaptionBox";
+import ImageLightbox from "./ImageLightbox";
 
 const HomeItem = (props) => {
   const [isLiked, setIsLiked] = useState(props.isLiked || false);
@@ -20,6 +21,7 @@ const HomeItem = (props) => {
   const [isCommented, setIsCommented] = useState(props.isCommented || false);
   const [commentCount, setCommentCount] = useState(props.commentCount || 1);
   const [shareCount, setShareCount] = useState(props.commentCount || 0);
+  const [isViewerOpen, setIsViewerOpen] = useState(false);
 
   // Function to detect image orientation
   const handleImageLoad = (e) => {
@@ -51,23 +53,10 @@ const HomeItem = (props) => {
     }
   };
 
-  const handleClick = () => {
-    const img = document.createElement("img");
-    img.src = props.image;
-    img.style.position = "fixed";
-    img.style.top = "0";
-    img.style.left = "0";
-    img.style.width = "100vw";
-    img.style.height = "100vh";
-    img.style.objectFit = "contain";
-    img.style.background = "rgba(0,0,0,0.8)";
-    img.style.zIndex = "9999";
-    img.style.cursor = "pointer";
-
-    // Close fullscreen when clicked
-    img.onclick = () => document.body.removeChild(img);
-
-    document.body.appendChild(img);
+  // The image sits inside the card's <Link>, so stop that click from navigating.
+  const handleImageClick = (e) => {
+    e.preventDefault();
+    setIsViewerOpen(true);
   };
 
   useEffect(() => {
@@ -140,7 +129,7 @@ const HomeItem = (props) => {
               <img
                 className={getImageClasses()}
                 src={props.image}
-                onClick={handleClick}
+                onClick={handleImageClick}
                 onLoad={handleImageLoad}
                 alt="Post"
               />
@@ -183,6 +172,15 @@ const HomeItem = (props) => {
           </Link>
         </Card>
       </li>
+
+      {/* Kept outside the <Link>: React events bubble through portals too. */}
+      {isViewerOpen && (
+        <ImageLightbox
+          src={props.image}
+          alt={`Photo by ${props.userName}`}
+          onClose={() => setIsViewerOpen(false)}
+        />
+      )}
     </div>
   );
 };

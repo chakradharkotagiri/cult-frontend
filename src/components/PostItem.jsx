@@ -3,10 +3,12 @@ import Card from "../shared/Components/FormElements/Card";
 import { ProfileContext } from "../shared/hooks/ProfileContext";
 import { FaHeart } from "react-icons/fa"; // for like icon
 import {API_URL} from "../config"
+import ImageLightbox from "./ImageLightbox";
 const PostItem = ({ id, image, caption }) => {
   const { profile } = useContext(ProfileContext);
   const [likes, setLikes] = useState(0);
   const [liked, setLiked] = useState(false);
+  const [isViewerOpen, setIsViewerOpen] = useState(false);
 
   useEffect(() => {
     const fetchLikes = async () => {
@@ -50,19 +52,20 @@ const PostItem = ({ id, image, caption }) => {
           className="w-96 h-[500px]"
           src={image}
           alt="Post"
-          onClick={() => {
-            const img = document.createElement("img");
-            img.src = image;
-            img.style = "position:fixed;top:0;left:0;width:100vw;height:100vh;object-fit:contain;background:rgba(0,0,0,0.8);z-index:9999;cursor:pointer";
-            img.onclick = () => document.body.removeChild(img);
-            document.body.appendChild(img);
-          }}
+          onClick={() => setIsViewerOpen(true)}
         />
         <div className="text-white mt-2">Caption: {caption}</div>
         <div className="flex items-center gap-2 mt-2 text-white cursor-pointer" onClick={handleLike}>
           <FaHeart color={liked ? "red" : "white"} /> {likes}
         </div>
       </Card>
+      {isViewerOpen && (
+        <ImageLightbox
+          src={image}
+          alt={caption || "Post"}
+          onClose={() => setIsViewerOpen(false)}
+        />
+      )}
     </li>
   );
 };

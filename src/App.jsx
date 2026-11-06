@@ -22,6 +22,7 @@ import RequireAuth from "./shared/Components/authentication/RequireAuth";
 import EditProfileForm from "../src/components/EditProfileForm";
 import { jwtDecode } from "jwt-decode";
 
+
 const App = () => {
   const location = useLocation();
   const navigate = useNavigate();

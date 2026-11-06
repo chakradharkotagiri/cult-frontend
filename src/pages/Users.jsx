@@ -6,8 +6,6 @@ import { API_URL } from "../config";
 const Users = ({ className, ...rest }) => {
   const [allUsers, setAllUsers] = useState([]);
 
-
-
   useEffect(() => {
     const otherUsers = async () => {
       const token = localStorage.getItem("token");
@@ -17,13 +15,12 @@ const Users = ({ className, ...rest }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      if (res.ok){
+      if (res.ok) {
         const data = await res.json();
         setAllUsers(data);
-      }else {
-        console.error('Failed to fetch users', res.status);
+      } else {
+        console.error("Failed to fetch users", res.status);
       }
-    
     };
 
     otherUsers();

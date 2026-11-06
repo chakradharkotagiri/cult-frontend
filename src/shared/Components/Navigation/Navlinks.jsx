@@ -143,9 +143,13 @@ const Navlinks = () => {
           )}
         </ul>
       </div>
-      <div>
-        <img src={profile.avatar} className="h-8 w-8 object-cover rounded-md" />
-      </div>
+      <Link to="/profile" aria-label="My profile" className="hover:opacity-80">
+        <img
+          src={profile?.avatar || DEFAULT_AVATAR}
+          alt=""
+          className="h-8 w-8 object-cover rounded-md"
+        />
+      </Link>
     </div>
   );
 };

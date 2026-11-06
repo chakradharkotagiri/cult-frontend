@@ -101,77 +101,75 @@ const HomeItem = (props) => {
   };
 
   return (
-    <div className="flex justify-center">
-      <li className="w-[80%] shadow-lg bg-[#282828] mb-5 rounded-xl text-white">
-        <Card className="p-4 rounded-xl overflow-hidden">
-          <Link
-            to={`/profile/${props.authorId}`}
-            className="block pt-2 pb-2 px-10 hover:opacity-90"
-          >
-            <div className="flex">
-              <img
-                className="w-12 h-12 mx-5 rounded-md object-cover"
-                src={props.profileImage || DEFAULT_AVATAR}
-                alt="Profile pic"
-              />
-              <div>
-                <h2 className="text-sm font-bold mb-2">{props.userName}</h2>
-                <p className="text-xl text-gray-400">{props.name}</p>
-              </div>
+    <li className="w-full shadow-lg bg-[#282828] mb-5 rounded-xl text-white">
+      <Card className="p-4 rounded-xl overflow-hidden">
+        <Link
+          to={`/profile/${props.authorId}`}
+          className="block hover:opacity-90"
+        >
+          <div className="flex gap-3">
+            <img
+              className="w-12 h-12 rounded-md object-cover"
+              src={props.profileImage || DEFAULT_AVATAR}
+              alt="Profile pic"
+            />
+            <div>
+              <h2 className="text-sm font-bold mb-2">{props.userName}</h2>
+              <p className="text-xl text-gray-400">{props.name}</p>
+            </div>
+          </div>
+
+          <div className="mt-3 mb-4 text-left font-serif text-sm">
+            {props.userName} : {props.caption}
+          </div>
+
+          {/* Dynamic image styling based on orientation */}
+          <div className="flex justify-center mb-4">
+            <img
+              className={getImageClasses()}
+              src={props.image}
+              onClick={handleImageClick}
+              onLoad={handleImageLoad}
+              alt="Post"
+            />
+          </div>
+
+          <div className="flex">
+            <div className="mt-4">
+              <button onClick={handleLike}>
+                <LikeIcon
+                  className={`w-6 h-6 mx-auto ${
+                    liked
+                      ? "text-red-500 fill-red-500"
+                      : "text-white fill-none"
+                  }`}
+                />
+              </button>
+              <p className="text-sm mt-1 text-gray-300">{likes}</p>
             </div>
 
-            <div className="mt-3 mb-6 ml-8 text-left font-serif text-sm">
-              {props.userName} : {props.caption}
+            <div className="mt-4 ml-3">
+              <button onClick={toggleLike}>
+                <CommentIcon
+                  className={`w-6 h-6 mx-auto ${
+                    isLiked
+                      ? "text-red-500 fill-red-500"
+                      : "text-white fill-none"
+                  }`}
+                />
+              </button>
+              <p className="text-sm mt-1 text-gray-300">{commentCount}</p>
             </div>
 
-            {/* Dynamic image styling based on orientation */}
-            <div className="flex justify-center mb-4">
-              <img
-                className={getImageClasses()}
-                src={props.image}
-                onClick={handleImageClick}
-                onLoad={handleImageLoad}
-                alt="Post"
-              />
+            <div className="mt-4 ml-3">
+              <button onClick={(e) => e.preventDefault()}>
+                <ShareIcon />
+              </button>
+              <p className="text-sm mt-1 text-gray-300">{shareCount}</p>
             </div>
-
-            <div className="flex">
-              <div className="mt-4">
-                <button onClick={handleLike}>
-                  <LikeIcon
-                    className={`w-6 h-6 mx-auto ${
-                      liked
-                        ? "text-red-500 fill-red-500"
-                        : "text-white fill-none"
-                    }`}
-                  />
-                </button>
-                <p className="text-sm mt-1 text-gray-300">{likes}</p>
-              </div>
-
-              <div className="mt-4 ml-3">
-                <button onClick={toggleLike}>
-                  <CommentIcon
-                    className={`w-6 h-6 mx-auto ${
-                      isLiked
-                        ? "text-red-500 fill-red-500"
-                        : "text-white fill-none"
-                    }`}
-                  />
-                </button>
-                <p className="text-sm mt-1 text-gray-300">{commentCount}</p>
-              </div>
-
-              <div className="mt-4 ml-3">
-                <button onClick={(e) => e.preventDefault()}>
-                  <ShareIcon />
-                </button>
-                <p className="text-sm mt-1 text-gray-300">{shareCount}</p>
-              </div>
-            </div>
-          </Link>
-        </Card>
-      </li>
+          </div>
+        </Link>
+      </Card>
 
       {/* Kept outside the <Link>: React events bubble through portals too. */}
       {isViewerOpen && (
@@ -181,7 +179,7 @@ const HomeItem = (props) => {
           onClose={() => setIsViewerOpen(false)}
         />
       )}
-    </div>
+    </li>
   );
 };
 

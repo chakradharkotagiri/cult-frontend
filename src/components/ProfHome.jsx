@@ -18,46 +18,39 @@ const ProfHome = ({ className }) => {
   if (!user) return null;
 
   return (
-    <div
-      className={` bg-[#1A1A1A] text-white font-Inter  rounded-lg md:w-[425px] 2xl:w-[500px]  shadow-lg ${
-        className || ""
-      }`}
-    >
-      <div className="">
-        <ProfileBackIcon className="w-full h-full block" />
-      </div>
-      <div className="">
-        <img
-          src={user.avatar || DEFAULT_AVATAR}
-          className="w-40 h-40 border-[10px] border-[#1A1A1A] object-contain rounded-lg  -translate-y-[200%] translate-x-[82%] 2xl:translate-x-[100%] z-10 relative bg-[#1A1A1A] p-1"
-          alt="Profile"
-        />
-        {/* user Info box  */}
-        <div className="bg-[#282828] ml-5 h-80 w-[90%]  rounded-xl overflow-hidden z-0  -translate-y-[125%]">
-          <div className="flex">
-            <div className="ml-12 mt-3">{user.followers}</div>
-            <div className="md:ml-64 2xl:ml-[73%] mt-3">0</div>
+    <div className={`w-full text-white font-Inter ${className || ""}`}>
+      <ProfileBackIcon className="-mt-[5.3%] block h-auto w-full" />
+
+      <div className="relative -mt-[52%] rounded-xl bg-[#282828] px-5 pb-6">
+        <div className="grid grid-cols-[1fr_auto_1fr] items-start gap-2">
+          <div className="pt-3 text-center">
+            <div>{user.followers ?? 0}</div>
+            <div className="text-sm text-gray-500">Followers</div>
           </div>
-          <div className="flex">
-            <div className="text-gray-500 pl-5">Followers</div>
-            <div className="text-gray-500 md:ml-[50%] 2xl:ml-[60%]">Following</div>
-          </div>
-          <div className="text-center pt-8 font-semibold text-xl">
-            {user.firstName} {user.lastName}
-          </div>
-          <div className="text-center pt-3 text-[#626161] font-light">
-            @{user.username}
-          </div>
-          <div className="pt-5 text-center">{user.bio || "No bio yet"}</div>
-          <div className="flex justify-center pt-4">
-            <button
-              onClick={toProfile}
-              className="w-[246px] h-[42px] text-sm rounded-2xl bg-gradient-to-b from-[#282828] to-[#4e4d4d]"
-            >
-              My Profile
-            </button>
+          <img
+            src={user.avatar || DEFAULT_AVATAR}
+            className="-mt-16 h-32 w-32 rounded-lg border-[10px] border-[#1A1A1A] bg-[#1A1A1A] object-cover"
+            alt="Profile"
+          />
+          <div className="pt-3 text-center">
+            <div>{user.following ?? 0}</div>
+            <div className="text-sm text-gray-500">Following</div>
           </div>
         </div>
+
+        <div className="pt-5 text-center text-xl font-semibold">
+          {user.firstName} {user.lastName}
+        </div>
+        <div className="pt-2 text-center font-light text-[#626161]">
+          @{user.username}
+        </div>
+        <div className="pt-4 text-center">{user.bio || "No bio yet"}</div>
+        <button
+          onClick={toProfile}
+          className="mt-5 h-[42px] w-full rounded-2xl bg-gradient-to-b from-[#282828] to-[#4e4d4d] text-sm"
+        >
+          My Profile
+        </button>
       </div>
     </div>
   );

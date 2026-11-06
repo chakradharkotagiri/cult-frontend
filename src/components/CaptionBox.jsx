@@ -3,7 +3,7 @@ import React from "react";
 const CaptionBox = ({ className, profileImage }) => {
   return (
     <div
-      className={`${className} h-24 w-[80%] bg-[#282828] flex items-center rounded-xl mb-5  shadow-lg mx-auto p-4`}
+      className={`${className} h-24 w-full bg-[#282828] flex items-center rounded-xl mb-5 shadow-lg p-4`}
     >
       <div className="mx-2">
         <img className="h-9 w-9 object-cover rounded-lg" src={profileImage} />

@@ -29,7 +29,7 @@ const StoryBar = () => {
     otherUsers();
   }, []);
   return (
-    <div className="flex overflow-x-auto scrollbar-hide gap-9 w-[80%] mx-auto p-4">
+    <div className="flex overflow-x-auto scrollbar-hide gap-4 w-full py-4">
     {allUsers.map((user) => (
       <div
         key={user.id}

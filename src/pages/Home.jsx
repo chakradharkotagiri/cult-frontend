@@ -2,13 +2,23 @@ import React, { useEffect, useState } from "react";
 import HomeList from "../components/HomeList";
 import Users from "./Users";
 import ProfHome from "../components/ProfHome";
-import { useContext } from "react";
-import { ProfileContext } from "../shared/hooks/ProfileContext";
 import axios from "axios";
 import { API_URL } from "../config";
 
+const stickyColumnClasses =
+  "sticky top-nav self-start max-h-[calc(100dvh-theme(spacing.nav))] overflow-y-auto scrollbar-hide py-4";
+
+/**
+ * The grid below is the only thing that positions the three columns: their
+ * widths and gaps are all defined here. Components placed inside it should
+ * fill the space they are given (w-full) and never set their own outer width,
+ * margins or absolute position, or the columns drift apart again.
+ *
+ *   below lg  feed only
+ *   lg        feed + suggestions
+ *   xl and up profile + feed + suggestions, with equal side columns
+ */
 const Home = () => {
-  const { profile } = useContext(ProfileContext);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -25,17 +35,19 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#1A1A1A] relative overflow-hidden">
-      <div className="hidden md:block absolute  ml-0 left-0 top-0   h-full z-10">
-        <ProfHome className="" profileData={profile} />
-      </div>
+    <div className="min-h-[calc(100dvh-theme(spacing.nav))] bg-[#1A1A1A]">
+      <div className="page-container grid grid-cols-[minmax(0,672px)] justify-center gap-6 lg:grid-cols-[minmax(0,672px)_300px] xl:grid-cols-[300px_minmax(0,1fr)_300px]">
+        <aside className={`hidden xl:block ${stickyColumnClasses}`}>
+          <ProfHome />
+        </aside>
 
-      <div className="h-screen overflow-y-scroll relative scrollbar-hide mx-0 z-30 md:mx-[25%]">
-        <HomeList className="" posts={posts} />
-      </div>
+        <main className="min-w-0">
+          <HomeList posts={posts} />
+        </main>
 
-      <div className="hidden md:block absolute right-0 top-0 mr-4 md:w-[27%] 2xl:w-1/4 h-full z-10">
-        <Users className="" />
+        <aside className={`hidden lg:block ${stickyColumnClasses}`}>
+          <Users />
+        </aside>
       </div>
     </div>
   );
